@@ -146,69 +146,69 @@ class HomeScreen extends StatelessWidget {
                       height: 274,
                       child: ListViewCart('Gà'),
                     ),
-                    Container(
-                      // padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Món Hot Trong Tuần',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20,
-                              // color: Colors.grey.shade500,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Xem tất cả",
-                              style: TextStyle(
-                                  // fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 274,
-                      child: ListViewCart('Chó'),
-                    ),
-                    Container(
-                      // padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Món Dễ Chế Biến',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20,
-                              // color: Colors.grey.shade500,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Xem tất cả",
-                              style: TextStyle(
-                                  // fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 274,
-                      child: ListViewCart('Gà'),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
+                    // Container(
+                    //   // padding: EdgeInsets.only(left: 16, right: 16),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         'Món Hot Trong Tuần',
+                    //         style: TextStyle(
+                    //           fontWeight: FontWeight.normal,
+                    //           fontSize: 20,
+                    //           // color: Colors.grey.shade500,
+                    //         ),
+                    //       ),
+                    //       TextButton(
+                    //         onPressed: () {},
+                    //         child: const Text(
+                    //           "Xem tất cả",
+                    //           style: TextStyle(
+                    //               // fontWeight: FontWeight.bold,
+                    //               fontSize: 14,
+                    //               color: Colors.blue),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   height: 274,
+                    //   child: ListViewCart('Chó'),
+                    // ),
+                    // Container(
+                    //   // padding: EdgeInsets.only(left: 16, right: 16),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         'Món Dễ Chế Biến',
+                    //         style: TextStyle(
+                    //           fontWeight: FontWeight.normal,
+                    //           fontSize: 20,
+                    //           // color: Colors.grey.shade500,
+                    //         ),
+                    //       ),
+                    //       TextButton(
+                    //         onPressed: () {},
+                    //         child: const Text(
+                    //           "Xem tất cả",
+                    //           style: TextStyle(
+                    //               // fontWeight: FontWeight.bold,
+                    //               fontSize: 14,
+                    //               color: Colors.blue),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   height: 274,
+                    //   child: ListViewCart('Gà'),
+                    // ),
+                    // SizedBox(
+                    //   height: 40,
+                    // ),
                   ],
                 ),
               ),
