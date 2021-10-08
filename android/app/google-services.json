@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "90458436874",
+    "project_id": "cookbox-a8b4a",
+    "storage_bucket": "cookbox-a8b4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90458436874:android:3b3a1a76b214ed9c6476f3",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90458436874-3nab1brf6uoom46ddipl4gtgc9uhpgjv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app",
+            "certificate_hash": "0ff9d52fc472227fd1c5dcd8b9a110cbc8803c77"
+          }
+        },
+        {
+          "client_id": "90458436874-og0uhv8u05b0vij69u1ngrlksumegttt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5eJESycDQvSgb0_u0fSaheMvNz2dNIf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90458436874-og0uhv8u05b0vij69u1ngrlksumegttt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

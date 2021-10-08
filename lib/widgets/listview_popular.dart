@@ -1,0 +1,79 @@
+import 'package:app/getx/controller/dishs.dart';
+import 'package:app/models/dish.dart';
+import 'package:app/providers/products.dart';
+import 'package:app/testCallApi/dish_controller.dart';
+import 'package:app/testCallApi/dish_test.dart';
+import 'package:app/widgets/popular_item.dart';
+// import 'package:app/widgets/product_item.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+class ListViewCart extends StatelessWidget {
+  String type;
+  ListViewCart(this.type);
+
+  var listDish = [];
+  @override
+  // Lish<Dish> dish = [];
+  Widget build(BuildContext context) {
+    final DishController controller = Get.put(DishController());
+    List<Item> listDish = controller.listItem;
+
+    //  final Dishs _p = Get.put(Dishs());
+    //  List<Dish> listDish = _p.getType(type);
+
+    // final productData = Provider.of<Products>(context);
+    // var products = productData.items;
+    // products = productData.getType(type).toList();
+
+    // List<PopularItems> popularItems = [
+    //   PopularItems(
+    //       text: "Thai Me Up Restaurant &\nBrewery",
+    //       image:
+    //           "https://cookbeo.com/media/2020/11/dau-que-xao-thit-bo/dau-que-xao-thit-bo-4x3.webp"),
+    //   PopularItems(
+    //       text: "Tequila Mackingbir\nGreenpoint",
+    //       image:
+    //           "https://cookbeo.com/media/2020/11/dau-que-xao-thit-bo/dau-que-xao-thit-bo-4x3.webp"),
+    //   PopularItems(
+    //       text: "Tequila Mackingbir\nGreenpoint",
+    //       image:
+    //           "https://cookbeo.com/media/2020/11/dau-que-xao-thit-bo/dau-que-xao-thit-bo-4x3.webp"),
+    //   PopularItems(
+    //       text: "Tequila Mackingbir\nGreenpoint",
+    //       image:
+    //           "https://cookbeo.com/media/2020/11/dau-que-xao-thit-bo/dau-que-xao-thit-bo-4x3.webp"),
+    //   PopularItems(
+    //       text: "Tequila Mackingbir\nGreenpoint",
+    //       image:
+    //           "https://cookbeo.com/media/2020/11/dau-que-xao-thit-bo/dau-que-xao-thit-bo-4x3.webp"),
+    // ];
+    return Container(
+      height: 274,
+      child: ListView.builder(
+          itemCount: listDish.length,
+          scrollDirection: Axis.horizontal,
+          // padding: EdgeInsets.only(left: 16),
+          shrinkWrap: true,
+          physics: BouncingScrollPhysics(),
+          // itemBuilder: (context, index) => ChangeNotifierProvider.value(
+          //       value: products[index],
+          //       child: PopularItemsCard(type),
+          //     )
+          itemBuilder: (context, index) {
+            Item dish = listDish[index];
+            return PopularItemsCard(
+             dish: dish,
+            );
+          }
+          // {
+          //   // return PopularItemsCard(popularItems: popularItems[index]);
+          // },
+          // itemBuilder: (context, index) {
+          //   return PopularItemsCard(popularItems: popularItems[index]);
+          // },
+          ),
+    );
+  }
+}
