@@ -1,13 +1,9 @@
 import 'package:app/getx/controller/cart_controller.dart';
-import 'package:app/getx/controller/dishs.dart';
-import 'package:app/models/dish.dart';
-import 'package:app/providers/cart.dart';
-import 'package:app/providers/product.dart';
 import 'package:app/screens/product_detail.dart';
-import 'package:app/testCallApi/dish_test.dart';
+import 'package:app/models/dish.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
 
 class PopularItemsCard extends StatelessWidget {
   final Item dish;

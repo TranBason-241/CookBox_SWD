@@ -1,8 +1,8 @@
-import 'package:app/getx/controller/dishs.dart';
-import 'package:app/models/dish.dart';
+
+
 import 'package:app/providers/products.dart';
-import 'package:app/testCallApi/dish_controller.dart';
-import 'package:app/testCallApi/dish_test.dart';
+import 'package:app/getx/controller/dish_controller.dart';
+import 'package:app/models/dish.dart';
 import 'package:app/widgets/popular_item.dart';
 // import 'package:app/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +18,6 @@ class ListViewCart extends StatelessWidget {
   // Lish<Dish> dish = [];
   Widget build(BuildContext context) {
     final DishController controller = Get.find<DishController>();
-
-
-
-    
     List<Item> listDish = controller.listItem;
 
     //  final Dishs _p = Get.put(Dishs());

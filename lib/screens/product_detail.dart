@@ -1,4 +1,4 @@
-import 'package:app/testCallApi/dish_test.dart';
+import 'package:app/models/dish.dart';
 import 'package:app/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

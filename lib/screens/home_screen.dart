@@ -2,6 +2,8 @@ import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:app/screens/search_screen.dart';
+import 'package:app/getx/controller/dish_controller.dart';
+import 'package:app/models/dish.dart';
 import 'package:app/widgets/bage.dart';
 import 'package:app/widgets/custom_navbar.dart';
 import 'package:app/widgets/listview_popular.dart';
@@ -21,9 +23,12 @@ class HomeScreen extends StatelessWidget {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD-qQL9OpIzo1logABt9hiMAEz0gpviVf8jA&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvabEVjmLblf-tX64eNpj6ZRtl_IH1weF_A&usqp=CAU',
   ];
+  final DishController controller = Get.find<DishController>();
 
   @override
   Widget build(BuildContext context) {
+    List<Item> listDish = controller.listItem;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff32726),
@@ -73,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                      Get.to(CartScreen());
+                    Get.to(CartScreen());
                   }))
         ],
       ),
@@ -144,8 +149,69 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Container(
                       height: 274,
-                      child: ListViewCart('Gà'),
+                      width: 1200,
+                      child: GetBuilder<DishController>(
+                        builder: (controller) => ListView.builder(
+                          itemCount: controller.listItem.length,
+                          itemBuilder: (context, index) {
+                            return PopularItemsCard(
+                              dish: controller.listItem[index],
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          // padding: EdgeInsets.only(left: 16),
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                        ),
+                      ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      // padding: EdgeInsets.only(left: 16, right: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Giảm giá',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20,
+                              // color: Colors.grey.shade500,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Xem tất cả",
+                              style: TextStyle(
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 274,
+                      width: 1200,
+                      child: GetBuilder<DishController>(
+                        builder: (controller) => ListView.builder(
+                          itemCount: controller.listItem.length,
+                          itemBuilder: (context, index) {
+                            return PopularItemsCard(
+                              dish: controller.listItem[index],
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          // padding: EdgeInsets.only(left: 16),
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                        ),
+                      ),
+                    )
                     // Container(
                     //   // padding: EdgeInsets.only(left: 16, right: 16),
                     //   child: Row(

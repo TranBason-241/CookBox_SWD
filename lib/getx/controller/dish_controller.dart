@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:app/testCallApi/dish_test.dart';
+import 'package:app/models/dish.dart';
 import 'package:http/http.dart' as http;
 // import 'package:app/testCallApi/dish_test_screen.dart';
 import 'package:get/get.dart';
