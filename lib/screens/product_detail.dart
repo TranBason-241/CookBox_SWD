@@ -141,7 +141,7 @@ class ProductDetailScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Điều chỉnh theo khẩu vị của bạn',
+                            Text('Điều chỉnh theo khẩu vị của bạnn', 
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 )),
