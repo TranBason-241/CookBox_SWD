@@ -45,16 +45,13 @@ class ProductDetailScreen extends StatelessWidget {
                 Container(
                   height: 300,
                   decoration: BoxDecoration(
-                    // color: Colors.red,
-                    color: const Color(0xffacfff),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                           dish.image))
-                  ),
+                      // color: Colors.red,
+                      color: const Color(0xffacfff),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                      image: DecorationImage(image: NetworkImage(dish.image))),
                 ),
                 // ),
                 // const SizedBox(
@@ -140,6 +137,20 @@ class ProductDetailScreen extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Điều chỉnh theo khẩu vị của bạn',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Row(
+                              children: [Text('Vi cay')],
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),

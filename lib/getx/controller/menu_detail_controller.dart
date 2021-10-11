@@ -28,7 +28,6 @@ class MenuDetailController extends GetxController {
       List<MenuDetail> list = [];
       MenuDetail obj = dishTestFromJson(response.body); //Tra ve 1 obj DishTest
       isLoading(true);
-      
       listItem = obj.items as List<Item>;
       update();
       return listItem;

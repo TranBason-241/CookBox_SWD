@@ -4,7 +4,7 @@ import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:app/screens/search_screen.dart';
-import 'package:app/getx/controller/dish_controller.dart';
+import 'package:app/getx/controller/menu_detail_controller.dart';
 import 'package:app/models/menu_detail.dart';
 import 'package:app/widgets/bage.dart';
 import 'package:app/widgets/custom_navbar.dart';

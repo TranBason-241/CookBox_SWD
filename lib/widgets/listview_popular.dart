@@ -1,7 +1,7 @@
 
 
 import 'package:app/providers/products.dart';
-import 'package:app/getx/controller/dish_controller.dart';
+import 'package:app/getx/controller/menu_detail_controller.dart';
 import 'package:app/models/menu_detail.dart';
 import 'package:app/widgets/popular_item.dart';
 // import 'package:app/widgets/product_item.dart';
