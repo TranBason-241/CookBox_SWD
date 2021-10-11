@@ -2,7 +2,7 @@
 
 import 'package:app/providers/products.dart';
 import 'package:app/getx/controller/dish_controller.dart';
-import 'package:app/models/dish.dart';
+import 'package:app/models/menu_detail.dart';
 import 'package:app/widgets/popular_item.dart';
 // import 'package:app/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class ListViewCart extends StatelessWidget {
   @override
   // Lish<Dish> dish = [];
   Widget build(BuildContext context) {
-    final DishController controller = Get.find<DishController>();
+    final MenuDetailController controller = Get.find<MenuDetailController>();
     List<Item> listDish = controller.listItem;
 
     //  final Dishs _p = Get.put(Dishs());

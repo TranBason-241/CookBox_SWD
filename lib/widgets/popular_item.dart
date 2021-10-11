@@ -1,9 +1,8 @@
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/screens/product_detail.dart';
-import 'package:app/models/dish.dart';
+import 'package:app/models/menu_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class PopularItemsCard extends StatelessWidget {
   final Item dish;
@@ -33,7 +32,7 @@ class PopularItemsCard extends StatelessWidget {
         ));
       },
       child: Container(
-        padding: EdgeInsets.only(right: 3),
+        padding: EdgeInsets.only(right: 7),
         height: 124,
         width: 150,
         child: Container(
@@ -107,7 +106,7 @@ class PopularItemsCard extends StatelessWidget {
                       // color: Colors.red,
                       padding: EdgeInsets.only(left: 3, right: 15),
                       child: Text(
-                        '${dish.nutrientDes}',
+                        '${dish.price}',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,

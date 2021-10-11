@@ -1,4 +1,4 @@
-import 'package:app/models/dish.dart';
+import 'package:app/models/menu_detail.dart';
 import 'package:app/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,15 +45,16 @@ class ProductDetailScreen extends StatelessWidget {
                 Container(
                   height: 300,
                   decoration: BoxDecoration(
-                      // color: Colors.red,
-                      color: const Color(0xffacfff),
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                             dish.image))),
+                    // color: Colors.red,
+                    color: const Color(0xffacfff),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                           dish.image))
+                  ),
                 ),
                 // ),
                 // const SizedBox(
@@ -116,7 +117,7 @@ class ProductDetailScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${dish.nutrientDes}',
+                            '${dish.price}',
                             style: const TextStyle(
                               fontSize: 25,
                               color: Colors.green,

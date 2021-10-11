@@ -7,12 +7,15 @@ import 'package:app/getx/controller/dish_controller.dart';
 import 'package:get/get.dart';
 
 class Binding implements Bindings {
+  // int categoryID;
+  // Binding({this.categoryID = 3});
+
   @override
   void dependencies() {
     Get.lazyPut(() => LoginController());
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => NotifyController());
-    Get.lazyPut(() => DishController());
+    Get.lazyPut(() => MenuDetailController());
   }
 }

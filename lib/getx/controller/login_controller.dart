@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:app/screens/home.dart';
-import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +11,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class LoginController extends GetxController {
   // Intilize the flutter app
@@ -65,27 +63,23 @@ class LoginController extends GetxController {
       Map data = {'token': idToken};
       var body = json.encode(data);
       var response = await http.post(
-          Uri.parse(
-              "http://54.255.129.30:8100/api/v1/login"),
+          Uri.parse("http://54.255.129.30:8100/api/v1/login"),
           headers: {"Content-Type": "application/json"},
           body: body);
       final responseData = json.decode(response.body);
-
-
-
       var token = responseData['data'];
 
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setString('token', token);
 
+      print('Hello');
 
       //  var response2 = await http.get(
       // Uri.parse(
       //     "https://booking-yacht.azurewebsites.net/api/v1/agencies"),
       // headers: {"Content-Type": "application/json", "Authorization": "Bearer $token"},
       // );
-      
-      
+
       update();
       Get.back();
       Get.to(Home());

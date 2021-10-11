@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-DishTest dishTestFromJson(String str) => DishTest.fromJson(json.decode(str));
+MenuDetail dishTestFromJson(String str) => MenuDetail.fromJson(json.decode(str));
 
-String dishTestToJson(DishTest data) => json.encode(data.toJson());
+String dishTestToJson(MenuDetail data) => json.encode(data.toJson());
 
-class DishTest {
-  DishTest({
+class MenuDetail {
+  MenuDetail({
     required this.metaData,
     required this.items,
   });
@@ -17,7 +17,7 @@ class DishTest {
   MetaData metaData;
   List<Item> items;
 
-  factory DishTest.fromJson(Map<String, dynamic> json) => DishTest(
+  factory MenuDetail.fromJson(Map<String, dynamic> json) => MenuDetail(
         metaData: MetaData.fromJson(json["metaData"]),
         items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
       );
@@ -32,40 +32,45 @@ class Item {
   Item({
     required this.id,
     required this.name,
-    required this.description,
-    required this.categoryName,
-    required this.status,
-    required this.nutrientDes,
+    required this.price,
+    // required this.description,
+    // required this.categoryName,
+    // required this.status,
+    // required this.nutrientDes,
     required this.image,
   });
 
   int id;
   String name;
-  String description;
-  String categoryName;
-  bool status;
+  double price;
+  // String description;
+  // String categoryName;
+  // bool status;
   
-  String nutrientDes;
+  // String nutrientDes;
   String image;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        categoryName: json["categoryName"],
-        status: json["status"],
-        nutrientDes: json["nutrient_des"] == null ? null : json["nutrient_des"],
-        image: json["image"] == null ? null : json["image"],
+        id: json['dish']["id"],
+        name: json['dish']["name"],
+        price: json["price"],
+        image: json['dish']["image"],
+        // description: json["description"],
+        // categoryName: json["categoryName"],
+        // status: json["status"],
+        // nutrientDes: json["nutrient_des"] == null ? null : json["nutrient_des"],
+        // image: json["image"] == null ? null : json["image"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "description": description,
-        "categoryName": categoryName,
-        "status": status,
-        "nutrient_des": nutrientDes == null ? null : nutrientDes,
-        "image": nutrientDes == null ? null : nutrientDes,
+        "price": price,
+        // "description": description,
+        // "categoryName": categoryName,
+        // "status": status,
+        // "nutrient_des": nutrientDes == null ? null : nutrientDes,
+        "image": image == null ? null : image,
       };
 }
 

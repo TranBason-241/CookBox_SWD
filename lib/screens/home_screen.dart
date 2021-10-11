@@ -1,9 +1,11 @@
+import 'package:app/getx/controller/dish_detail_controller.dart';
+import 'package:app/models/detail_dish.dart';
 import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:app/screens/search_screen.dart';
 import 'package:app/getx/controller/dish_controller.dart';
-import 'package:app/models/dish.dart';
+import 'package:app/models/menu_detail.dart';
 import 'package:app/widgets/bage.dart';
 import 'package:app/widgets/custom_navbar.dart';
 import 'package:app/widgets/listview_popular.dart';
@@ -23,12 +25,19 @@ class HomeScreen extends StatelessWidget {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD-qQL9OpIzo1logABt9hiMAEz0gpviVf8jA&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvabEVjmLblf-tX64eNpj6ZRtl_IH1weF_A&usqp=CAU',
   ];
-  final DishController controller = Get.find<DishController>();
+  // final DishController controller = Get.put(DishController(categoryID: 1));
+  final MenuDetailController controller =
+      Get.put(MenuDetailController(categoryID: 2));
+  final DishDetailController controller2 = Get.put(DishDetailController());
+
+
 
   @override
   Widget build(BuildContext context) {
-    List<Item> listDish = controller.listItem;
 
+    var a = controller2.fetchDishDetail();
+
+    // print(' ${a.name}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff32726),
@@ -150,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       height: 274,
                       width: 1200,
-                      child: GetBuilder<DishController>(
+                      child: GetBuilder<MenuDetailController>(
                         builder: (controller) => ListView.builder(
                           itemCount: controller.listItem.length,
                           itemBuilder: (context, index) {
@@ -197,12 +206,12 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       height: 274,
                       width: 1200,
-                      child: GetBuilder<DishController>(
-                        builder: (controller) => ListView.builder(
-                          itemCount: controller.listItem.length,
+                      child: GetBuilder<MenuDetailController>(
+                        builder: (controller2) => ListView.builder(
+                          itemCount: controller2.listItem.length,
                           itemBuilder: (context, index) {
                             return PopularItemsCard(
-                              dish: controller.listItem[index],
+                              dish: controller2.listItem[index],
                             );
                           },
                           scrollDirection: Axis.horizontal,
