@@ -66,13 +66,21 @@ class LoginController extends GetxController {
           Uri.parse("http://54.255.129.30:8100/api/v1/login"),
           headers: {"Content-Type": "application/json"},
           body: body);
-      final responseData = json.decode(response.body);
-      var token = responseData['data'];
+          print('a');
+      if (response.statusCode == 200) {
+        print('b');
+        var prefs = await SharedPreferences.getInstance();
+        final responseData = json.decode(response.body);
 
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // prefs.setString('token', token);
+        var token = responseData['token'];
 
-      print('Hello');
+        prefs.setString('token', token);
+        //  prefs.setString('token', token);
+        // print('Hello Dat');
+        update();
+        Get.back();
+        Get.to(Home());
+      }
 
       //  var response2 = await http.get(
       // Uri.parse(
@@ -80,9 +88,6 @@ class LoginController extends GetxController {
       // headers: {"Content-Type": "application/json", "Authorization": "Bearer $token"},
       // );
 
-      update();
-      Get.back();
-      Get.to(Home());
     } catch (ex) {
       Get.back();
       Get.snackbar('Sign In Error', 'Error Signing in',

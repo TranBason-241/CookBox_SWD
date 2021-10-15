@@ -1,4 +1,5 @@
 import 'package:app/getx/controller/cart_controller.dart';
+import 'package:app/getx/controller/dish_detail_controller.dart';
 import 'package:app/screens/product_detail.dart';
 import 'package:app/models/menu_detail.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,11 @@ class PopularItemsCard extends StatelessWidget {
     // final Cart1 _p = Get.find<Cart1>();
     //  var List<Dish> = [];
     final CartController cart = Get.put(CartController());
-
+    final DishDetailController detailController = Get.find<DishDetailController>();
     // String imgUrl = dish.picture;
     return GestureDetector(
       onTap: () {
-        Get.to(ProductDetailScreen(
-          dish: dish,
-        ));
+       detailController.fetchDishDetail(dish.id);
       },
       child: Container(
         padding: EdgeInsets.only(right: 7),
