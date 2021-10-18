@@ -24,6 +24,7 @@ class DishResponse {
     this.nutrientDetails,
     this.repices,
     this.tasteDetails,
+    this.quantity = 0
   });
 
   int? id;
@@ -39,6 +40,7 @@ class DishResponse {
   List<NutrientDetail>? nutrientDetails;
   List<Repice>? repices;
   List<TasteDetail>? tasteDetails;
+  int? quantity;
 
   factory DishResponse.fromJson(Map<String, dynamic> json) => DishResponse(
         id: json["id"],

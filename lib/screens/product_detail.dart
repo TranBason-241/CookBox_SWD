@@ -1,6 +1,9 @@
+import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/dish_detail_controller.dart';
 import 'package:app/models/detail_dish.dart';
 import 'package:app/models/menu_detail.dart';
+import 'package:app/screens/cart_screen.dart';
+import 'package:app/screens/home.dart';
 import 'package:app/widgets/custom_icon_button.dart';
 import 'package:app/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
 
   // ProductDetailScreen({required this.dish});
   DishDetailController controller = Get.find<DishDetailController>();
+  // CartController cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,7 @@ class ProductDetailScreen extends StatelessWidget {
               children: [
                 // Expanded(  child:
                 Container(
-                  height: 500,
+                  height: 300,
                   decoration: BoxDecoration(
                     // color: Colors.red,
                     color: const Color(0xffacfff),
@@ -80,7 +84,7 @@ class ProductDetailScreen extends StatelessWidget {
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${controller.dish.price}đ',
+                            '${controller.dish.price!.toStringAsFixed(0)}đ',
                             style: const TextStyle(
                               fontSize: 30,
                               color: Colors.red,
@@ -188,7 +192,10 @@ class ProductDetailScreen extends StatelessWidget {
                                                             .withOpacity(0.2),
                                                         icon: Icon(Icons.remove,
                                                             size: 16),
-                                                        onPressed: () {},
+                                                        onPressed: () {
+                                                          controller
+                                                              .editTaste('remove');
+                                                        },
                                                         margin:
                                                             EdgeInsets.all(0)),
                                                     Container(
@@ -211,7 +218,8 @@ class ProductDetailScreen extends StatelessWidget {
                                                         ),
                                                         onPressed: () {
                                                           // updateState("add");
-                                                          controller.editTaste();
+                                                          controller
+                                                              .editTaste('add');
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),
@@ -545,7 +553,7 @@ class ProductDetailScreen extends StatelessWidget {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: <Widget>[
                           Icon(
                             Icons.local_mall_outlined,
                             color: Colors.white,
@@ -553,13 +561,18 @@ class ProductDetailScreen extends StatelessWidget {
                           SizedBox(
                             width: 10,
                           ),
-                          Text(
-                            'Thêm vào giỏ hàng',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
+                          InkWell(
+                            onTap: () {
+                              showButtonModalSheet(context, controller);
+                            },
+                            child: Text(
+                              'Thêm vào giỏ hàng',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
@@ -659,9 +672,7 @@ Widget buildCustomTaste() {
                             Icons.add,
                             size: 16,
                           ),
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                           margin: EdgeInsets.all(0)),
                       // Text("${lv == 3 ? '(nguyên bản)' : ''}")
                     ],
@@ -744,5 +755,220 @@ Widget buildRecipe() {
         // )
       ],
     ),
+  );
+}
+
+showButtonModalSheet(BuildContext context, DishDetailController controller) {
+  CartController cartController = Get.find<CartController>();
+  // final items = <Widget>[
+  //   ListTile(
+  //     leading: Icon(Icons.photo_camera),
+  //     title: Text('Camera'),
+  //     onTap: () {},
+  //   ),
+  //   ListTile(
+  //     leading: Icon(Icons.photo_library),
+  //     title: Text('Select'),
+  //     onTap: () {},
+  //   ),
+  //   ListTile(
+  //     leading: Icon(Icons.delete),
+  //     title: Text('Delete'),
+  //     onTap: () {},
+  //   ),
+  //   Divider(),
+  //   if (true)
+  //     ListTile(
+  //       title: Text('Cancel'),
+  //       onTap: () {},
+  //     ),
+  // ];
+
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext _) {
+      return Stack(
+        children: [
+          Container(
+            height: 250,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.clear),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3.8,
+                    ),
+                    const Text(
+                      'Tùy chọn ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  height: 1.0,
+                  indent: 1.0,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              height: 110,
+                              width: 130,
+                              child: Image.network(
+                                (controller.dish.image == null)
+                                    ? ''
+                                    : controller.dish.image!,
+                                fit: BoxFit.cover,
+                              ))
+                        ],
+                      ),
+                      Container(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '${controller.dish.name}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Container(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: Obx(
+                                    () => Text(
+                                      '${(controller.dish.price! * controller.quantity.value).toStringAsFixed(0)}đ',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  )),
+                              Container(
+                                padding: EdgeInsets.only(top: 15, left: 130),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      child: CustomIconButton(
+                                          backgroundColor: Colors.green,
+                                          icon: Icon(
+                                            Icons.remove,
+                                            color: Colors.white,
+                                            size: 12,
+                                          ),
+                                          onPressed: () {
+                                            controller.setQuantity('remove');
+                                          },
+                                          margin: EdgeInsets.only()),
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Obx(
+                                          () => Text(
+                                            '${controller.quantity}',
+                                            style: TextStyle(
+                                              fontSize: 20 * 0.8,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        )),
+                                    Container(
+                                      child: CustomIconButton(
+                                          backgroundColor: Colors.green,
+                                          icon: Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                            size: 12,
+                                          ),
+                                          onPressed: () {
+                                            controller.setQuantity('add');
+                                          },
+                                          margin: EdgeInsets.only()),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 1.0,
+                  indent: 1.0,
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: SizedBox(
+              height: 55,
+              width: MediaQuery.of(context).size.width,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 55,
+                  color: Colors.blueAccent,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: GestureDetector(
+                      onTap: () {
+                        // Get.to(CartScreen());
+                        cartController.addToCart(
+                            controller.dish, controller.quantity.value);
+
+                             
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.local_mall_outlined,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Thêm vào giỏ hàngg',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+    isScrollControlled: true,
   );
 }

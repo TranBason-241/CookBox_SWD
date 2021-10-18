@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class DishDetailController extends GetxController {
   var isLoading = false.obs;
-
+  var quantity = 1.obs;
   var dish = DishResponse();
 
   // @override
@@ -15,6 +15,16 @@ class DishDetailController extends GetxController {
   //   super.onInit();
   //   fetchDish();
   // }
+  void setQuantity(String type) {
+    if (type == 'add') {
+      quantity += 1;
+      dish.quantity = dish.quantity! + 1;
+    } else {
+      if (quantity == 1) return;
+      quantity -= 1;
+      dish.quantity = dish.quantity! - 1;
+    }
+  }
 
   Future<DishResponse> fetchDishDetail(int id) async {
     isLoading(false);
@@ -25,7 +35,7 @@ class DishDetailController extends GetxController {
       // then parse the JSON.
       dish = dishResponseFromJson(response.body); //Tra ve 1 obj DishTest
       isLoading(true);
-      print('DDaya ne ${dish.name}');
+      // print('DDaya ne ${dish.name}');
       Get.to(ProductDetailScreen());
       update();
       return dish;
@@ -36,8 +46,19 @@ class DishDetailController extends GetxController {
     }
   }
 
-  void editTaste() {
-    dish.tasteDetails![0].tasteLevel = dish.tasteDetails![0].tasteLevel! + 1;
+  void editTaste(String type) {
+    //chi dang xu 1 cay thoi
+    if (type.compareTo('add') == 0) {
+      if (dish.tasteDetails![0].tasteLevel! < 3) {
+        dish.tasteDetails![0].tasteLevel =
+            dish.tasteDetails![0].tasteLevel! + 1;
+      }
+    } else {
+      if (dish.tasteDetails![0].tasteLevel! > 1) {
+        dish.tasteDetails![0].tasteLevel =
+            dish.tasteDetails![0].tasteLevel! - 1;
+      }
+    }
     update();
   }
 }
