@@ -16,10 +16,13 @@ class DishDetailController extends GetxController {
   //   fetchDish();
   // }
   void setQuantity(String type) {
-    if (type == 'add') {
+    if(type.compareTo('reset') == 0){
+      quantity.value = 1;
+    }
+    if (type.compareTo('add') == 0) {
       quantity += 1;
       dish.quantity = dish.quantity! + 1;
-    } else {
+    } else  {
       if (quantity == 1) return;
       quantity -= 1;
       dish.quantity = dish.quantity! - 1;

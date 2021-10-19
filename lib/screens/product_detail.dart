@@ -4,6 +4,7 @@ import 'package:app/models/detail_dish.dart';
 import 'package:app/models/menu_detail.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/home.dart';
+import 'package:app/screens/home_screen.dart';
 import 'package:app/widgets/custom_icon_button.dart';
 import 'package:app/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,6 +43,7 @@ class ProductDetailScreen extends StatelessWidget {
             onPressed: () {
               // Navigator.of(context).pushReplacementNamed(CartScrren.routeName);
               // Navigator.pushNamed(context, CartScreen.routeName);
+              Get.to(CartScreen());
             },
           ),
         ],
@@ -193,8 +195,8 @@ class ProductDetailScreen extends StatelessWidget {
                                                         icon: Icon(Icons.remove,
                                                             size: 16),
                                                         onPressed: () {
-                                                          controller
-                                                              .editTaste('remove');
+                                                          controller.editTaste(
+                                                              'remove');
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),
@@ -563,6 +565,7 @@ class ProductDetailScreen extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
+                              controller.setQuantity('reset');
                               showButtonModalSheet(context, controller);
                             },
                             child: Text(
@@ -937,8 +940,6 @@ showButtonModalSheet(BuildContext context, DishDetailController controller) {
                         // Get.to(CartScreen());
                         cartController.addToCart(
                             controller.dish, controller.quantity.value);
-
-                             
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

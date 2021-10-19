@@ -8,14 +8,43 @@ class CartController extends GetxController {
   // Cart({required this.total, required this.quantity});
 
   Map<int, DishResponse> cart = {};
-
-  List<DishResponse> listItemInCart = [];
-
+  var total = 0.0.obs;
 //  @override
 //   onInit() {
 //     super.onInit();
 //     getCart();
 //   }
+
+  void getTotal() {
+    total.value = 0.0;
+    cart.forEach((key, value) {
+      total.value += (cart[key]!.price! * cart[key]!.quantity!);
+    });
+  }
+
+  void deleteDishInCart(int id) {
+    if (cart.containsKey(id)) {
+      cart.remove(id);
+    }
+    update();
+  }
+
+  void editQuantity(int id, String type) {
+    if (cart.containsKey(id)) {
+      if (type.compareTo('add') == 0) {
+        cart[id]!.quantity = cart[id]!.quantity! + 1;
+        getTotal();
+      } else {
+        if (cart[id]!.quantity! > 1) {
+          cart[id]!.quantity = cart[id]!.quantity! - 1;
+          getTotal();
+        }
+      }
+
+      update();
+    }
+    return;
+  }
 
   void addToCart(DishResponse dish, int quantity) {
     DishResponse newDish = DishResponse();
@@ -29,8 +58,7 @@ class CartController extends GetxController {
         cart[newDish.id!] = newDish;
         cart[newDish.id]?.quantity = cart[newDish.id]!.quantity! + quantity;
       }
-      print(cart[19]!.tasteDetails![0].tasteName);
-      print(cart[19]!.quantity);
+      getTotal();
       update();
       Get.to(CartScreen());
     });
