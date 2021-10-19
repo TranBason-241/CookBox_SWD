@@ -53,7 +53,7 @@ class Item {
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json['dish']["id"],
         name: json['dish']["name"],
-        price: json["price"],
+        price: json["price"].toDouble(),
         image: json['dish']["image"],
         // description: json["description"],
         // categoryName: json["categoryName"],
