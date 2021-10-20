@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app/models/detail_dish.dart';
 import 'package:app/models/menu_detail.dart';
 import 'package:app/screens/product_detail.dart';
@@ -28,6 +30,7 @@ class DishDetailController extends GetxController {
       print('DDaya ne ${dish.name}');
       Get.to(ProductDetailScreen());
       update();
+      print(dish);
       return dish;
     } else {
       // If the server did not return a 200 OK response,
