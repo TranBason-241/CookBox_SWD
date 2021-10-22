@@ -33,13 +33,6 @@ class OrderController extends GetxController {
     if (response.statusCode == 200) {
       print("ALOOO");
       order = orderFromJson(response.body);
-      // print("So luong" + order.items!.length.toString());
-      // (order.items!.forEach((element) {
-      //   print(element);
-      // }));
-      // listItem = order.items as List<Item>;
-      // update();
-      // return listItem;
       print(order.items!.length.toString());
       Get.to(OrderScreen());
       update();
