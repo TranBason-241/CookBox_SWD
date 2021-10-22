@@ -1,6 +1,7 @@
 // import '/providers/orders.dart';
 // import '/screens/payment_screen.dart';
 import 'package:app/getx/controller/cart_controller.dart';
+import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final cart = Provider.of<Cart>(context);
     CartController cartController = Get.put(CartController());
+    OrderController orderController = Get.put(OrderController());
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xfff32726),
@@ -48,6 +50,7 @@ class CartScreen extends StatelessWidget {
         ),
         body: Stack(
           children: [
+            
             Column(
               children: [
                 Card(
@@ -331,9 +334,9 @@ class CartScreen extends StatelessWidget {
                                   ),
                                 )
                               : InkWell(
-                                  // onTap: (){
-
-                                  // },
+                                  onTap: () {
+                                    orderController.createOrder();
+                                  },
                                   child: Text(
                                     'Đặt hàng',
                                     style: TextStyle(

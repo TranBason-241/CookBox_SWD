@@ -20,7 +20,7 @@ class MenuDetailController extends GetxController {
     isLoading(false);
     final response = await http.get(Uri.parse(
         'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=2'));
-        
+
     print(categoryID);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

@@ -1,4 +1,6 @@
 import 'package:app/getx/controller/dish_detail_controller.dart';
+import 'package:app/getx/controller/order_controller.dart';
+import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/models/detail_dish.dart';
 import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
@@ -29,6 +31,9 @@ class HomeScreen extends StatelessWidget {
   final MenuDetailController controller =
       Get.put(MenuDetailController(categoryID: 2));
   final DishDetailController controller2 = Get.put(DishDetailController());
+  // final OrderDetailController controllerdd = Get.put(OrderDetailController());
+
+  // final OrderController controllerOrder = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -96,33 +101,33 @@ class HomeScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.red),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(2))),
-                      child: SizedBox(
-                          height: 150.0,
-                          width: double.infinity,
-                          child: Carousel(
-                            dotSpacing: 15.0,
-                            dotSize: 6.0,
-                            dotIncreasedColor: Colors.red,
-                            dotBgColor: Colors.transparent,
-                            indicatorBgPadding: 3.0,
-                            dotPosition: DotPosition.bottomCenter,
-                            dotHorizontalPadding: 5,
-                            dotVerticalPadding: 5,
-                            images: images
-                                .map((item) => Container(
-                                      child: Image.network(
-                                        item,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ))
-                                .toList(),
-                          )),
-                    ),
+                    // Container(
+                    //   decoration: BoxDecoration(
+                    //       border: Border.all(color: Colors.red),
+                    //       borderRadius:
+                    //           const BorderRadius.all(Radius.circular(2))),
+                    //   child: SizedBox(
+                    //       height: 150.0,
+                    //       width: double.infinity,
+                    //       child: Carousel(
+                    //         dotSpacing: 15.0,
+                    //         dotSize: 6.0,
+                    //         dotIncreasedColor: Colors.red,
+                    //         dotBgColor: Colors.transparent,
+                    //         indicatorBgPadding: 3.0,
+                    //         dotPosition: DotPosition.bottomCenter,
+                    //         dotHorizontalPadding: 5,
+                    //         dotVerticalPadding: 5,
+                    //         images: images
+                    //             .map((item) => Container(
+                    //                   child: Image.network(
+                    //                     item,
+                    //                     fit: BoxFit.cover,
+                    //                   ),
+                    //                 ))
+                    //             .toList(),
+                    //       )),
+                    // ),
                     SizedBox(
                       height: 5,
                     ),
@@ -162,6 +167,40 @@ class HomeScreen extends StatelessWidget {
                             return PopularItemsCard(
                               dish: controller.listItem[index],
                             );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          // padding: EdgeInsets.only(left: 16),
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 274,
+                      width: 1200,
+                      child: GetBuilder<OrderController>(
+                        builder: (controller) => ListView.builder(
+                          // itemCount: controller.order.items!.length,
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            // return PopularItemsCard(
+                            //   dish: controller.listItem[index],
+                            // );
+
+                            return Container(
+                                child: Column(
+                              children: [
+                                Text(controller.order.items!.first.date
+                                    .toString()),
+                                Text(controller.order.items!.first.id
+                                    .toString()),
+                                Text(controller.order.items!.first.paymentName
+                                    .toString()),
+                                // Text(
+                                //   controller.order.items!.first.date.toString(),
+                                // ),
+                              ],
+                            ));
                           },
                           scrollDirection: Axis.horizontal,
                           // padding: EdgeInsets.only(left: 16),
@@ -217,6 +256,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     )
+                    /////
                     // Container(
                     //   // padding: EdgeInsets.only(left: 16, right: 16),
                     //   child: Row(
