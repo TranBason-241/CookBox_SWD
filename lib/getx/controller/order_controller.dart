@@ -1,6 +1,7 @@
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
+import 'package:app/screens/home.dart';
 import 'package:app/screens/order_screen.dart';
 import 'dart:math';
 import 'package:get/get.dart';
@@ -9,12 +10,14 @@ import 'dart:convert';
 
 class OrderController extends GetxController {
   var orderCreate = ResponceOrder();
+  var statusCreate = 1.obs; 
+  // 1 default, 2 ok, 3 failed
   // List<Item> listItem = <Item>[].obs;
   // RxList<Item> productList = <Item>[].obs;
   // RxList<Order> order = <Order>[].obs;
   // List<Order> order = <Order>[].obs;
   var order = ResponceOrder();
-
+  
   @override
   void onInit() {
     // TODO: implement onInit
@@ -88,12 +91,15 @@ class OrderController extends GetxController {
         },
         body: body);
     // print(response.statusCode);
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
-      print(response.body);
-      print('ok');
+      // print(response.body);
+      // print('ok');
+      statusCreate.value = 1;
+      Get.to(Home());
     } else {
-      print('false roi');
+      // print('false roi');
+      statusCreate.value = 2;
       throw Exception("Fail to load order");
     }
   }
