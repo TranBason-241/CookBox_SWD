@@ -4,22 +4,24 @@
 
 import 'dart:convert';
 
-Order orderFromJson(String str) => Order.fromJson(json.decode(str));
+import 'package:app/models/order_detail.dart';
 
-String orderToJson(Order data) => json.encode(data.toJson());
+ResponceOrder orderFromJson(String str) => ResponceOrder.fromJson(json.decode(str));
 
-class Order {
-  Order({
+String orderToJson(ResponceOrder data) => json.encode(data.toJson());
+
+class ResponceOrder {
+  ResponceOrder({
     this.metaData,
     this.items,
   });
 
   MetaData? metaData;
-  List<Item>? items;
+  List<Order>? items;
 
-  factory Order.fromJson(Map<String, dynamic> json) => Order(
+  factory ResponceOrder.fromJson(Map<String, dynamic> json) => ResponceOrder(
         metaData: MetaData.fromJson(json["metaData"]),
-        items: List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
+        items: List<Order>.from(json["items"]!.map((x) => Order.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,8 +30,8 @@ class Order {
       };
 }
 
-class Item {
-  Item({
+class Order {
+  Order({
     this.id,
     this.date,
     this.paymentName,
@@ -53,9 +55,9 @@ class Item {
   String? storeName;
   int? total;
   String? orderStatus;
-  List<dynamic>? orderDetails;
+  List<OrderDetail>? orderDetails;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
         id: json["id"],
         date: DateTime.parse(json["date"]),
         paymentName: json["payment_name"],
@@ -66,21 +68,21 @@ class Item {
         storeName: json["store_name"],
         total: json["total"],
         orderStatus: json["order_status"],
-        orderDetails: List<dynamic>.from(json["orderDetails"].map((x) => x)),
+        orderDetails: List<OrderDetail>.from(json["orderDetails"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "date": date!.toIso8601String(),
-        "payment_name": paymentName,
-        "paymentId": paymentId,
-        "userId": userId,
-        "storeId": storeId,
+        "payment_name": paymentName as String,
+        "payment_id": paymentId,
+        "user_id": userId,
+        "store_id": storeId,
         "user_name": userName,
         "store_name": storeName,
         "total": total,
         "order_status": orderStatus,
-        "orderDetails": List<dynamic>.from(orderDetails!.map((x) => x)),
+        "orderDetails": List<dynamic>.from(orderDetails!.map((x) => x.toJson())),
       };
 }
 

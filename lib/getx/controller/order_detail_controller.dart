@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class OrderDetailController extends GetxController {
-  var orderDetail = OrderDetail();
+  var orderDetail = ResponceOrderDetail();
 
   @override
   void onInit() {
@@ -11,7 +11,7 @@ class OrderDetailController extends GetxController {
     fetchOrderDetail();
   }
 
-  Future<OrderDetail> fetchOrderDetail() async {
+  Future<ResponceOrderDetail> fetchOrderDetail() async {
     final response = await http.get(
         Uri.parse('http://54.255.129.30:8100/api/v1/user/orders/orderDetail'));
     if (response.statusCode == 200) {

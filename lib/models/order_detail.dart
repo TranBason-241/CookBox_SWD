@@ -4,23 +4,23 @@
 
 import 'dart:convert';
 
-OrderDetail orderDetailFromJson(String str) =>
-    OrderDetail.fromJson(json.decode(str));
+ResponceOrderDetail orderDetailFromJson(String str) =>
+    ResponceOrderDetail.fromJson(json.decode(str));
 
-String orderDetailToJson(OrderDetail data) => json.encode(data.toJson());
+String orderDetailToJson(ResponceOrderDetail data) => json.encode(data.toJson());
 
-class OrderDetail {
-  OrderDetail({
+class ResponceOrderDetail {
+  ResponceOrderDetail({
     this.metaData,
     this.items,
   });
 
   MetaData? metaData;
-  List<Item>? items;
+  List<OrderDetail>? items;
 
-  factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
+  factory ResponceOrderDetail.fromJson(Map<String, dynamic> json) => ResponceOrderDetail(
         metaData: MetaData.fromJson(json["metaData"]),
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<OrderDetail>.from(json["items"].map((x) => OrderDetail.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,8 +29,8 @@ class OrderDetail {
       };
 }
 
-class Item {
-  Item({
+class OrderDetail {
+  OrderDetail({
     this.id,
     this.dishId,
     this.dishName,
@@ -44,7 +44,7 @@ class Item {
   int? price;
   int? quantity;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
         id: json["id"],
         dishId: json["dish_id"],
         dishName: json["dish_name"],
@@ -53,7 +53,7 @@ class Item {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "order_id": id,
         "dish_id": dishId,
         "dish_name": dishName,
         "price": price,
