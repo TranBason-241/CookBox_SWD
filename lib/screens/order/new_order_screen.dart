@@ -12,6 +12,7 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<OrderController>(
+        init: OrderController(),
         builder: (controller) => ListView.builder(
           itemCount: controller.order.items!.length,
           itemBuilder: (context, index) {
