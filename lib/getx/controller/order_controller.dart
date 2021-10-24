@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
 import 'package:app/screens/home.dart';
-import 'package:app/screens/order_screen.dart';
-import 'dart:math';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+// class OrderBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.put(OrderController);
+//   }
+// }
 
 class OrderController extends GetxController {
   var orderCreate = ResponseOrder();
