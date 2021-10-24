@@ -27,7 +27,7 @@ class AccountScreen extends StatelessWidget {
                 height: 80,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, LoginScreen.routeName);
+                    // Navigator.pushNamed(context, LoginScreen.routeName);
                   },
                   child: Container(
                     color: Color(0xfff0f0f0),

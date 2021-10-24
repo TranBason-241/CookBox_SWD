@@ -631,135 +631,135 @@ class proDes extends StatelessWidget {
   }
 }
 
-Widget buildCustomTaste() {
-  List listTaste = [
-    {'taste': 'Cay'},
-    {'taste': 'Chua'},
-  ];
-  return Container(
-    margin: EdgeInsets.only(top: 0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 5,
-        ),
-        Column(
-          children: [
-            ...listTaste.map((taste) => Container(
-                  margin: EdgeInsetsDirectional.only(top: 5),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 80,
-                        child: Text(
-                          "${taste['taste']}: ",
-                          style: TextStyle(color: Colors.red, fontSize: 22),
-                        ),
-                      ),
-                      CustomIconButton(
-                          backgroundColor: Colors.black.withOpacity(0.2),
-                          icon: Icon(Icons.remove, size: 16),
-                          onPressed: () {},
-                          margin: EdgeInsets.all(0)),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          "3",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                      CustomIconButton(
-                          backgroundColor: Colors.black.withOpacity(0.2),
-                          icon: Icon(
-                            Icons.add,
-                            size: 16,
-                          ),
-                          onPressed: () {},
-                          margin: EdgeInsets.all(0)),
-                      // Text("${lv == 3 ? '(nguyên bản)' : ''}")
-                    ],
-                  ),
-                ))
-          ],
-        )
-      ],
-    ),
-  );
-}
+// Widget buildCustomTaste() {
+//   List listTaste = [
+//     {'taste': 'Cay'},
+//     {'taste': 'Chua'},
+//   ];
+//   return Container(
+//     margin: EdgeInsets.only(top: 0),
+//     child: Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         SizedBox(
+//           height: 5,
+//         ),
+//         Column(
+//           children: [
+//             ...listTaste.map((taste) => Container(
+//                   margin: EdgeInsetsDirectional.only(top: 5),
+//                   child: Row(
+//                     children: [
+//                       Container(
+//                         width: 80,
+//                         child: Text(
+//                           "${taste['taste']}: ",
+//                           style: TextStyle(color: Colors.red, fontSize: 22),
+//                         ),
+//                       ),
+//                       CustomIconButton(
+//                           backgroundColor: Colors.black.withOpacity(0.2),
+//                           icon: Icon(Icons.remove, size: 16),
+//                           onPressed: () {},
+//                           margin: EdgeInsets.all(0)),
+//                       Container(
+//                         margin: EdgeInsets.symmetric(horizontal: 10),
+//                         child: Text(
+//                           "3",
+//                           style: TextStyle(fontSize: 18),
+//                         ),
+//                       ),
+//                       CustomIconButton(
+//                           backgroundColor: Colors.black.withOpacity(0.2),
+//                           icon: Icon(
+//                             Icons.add,
+//                             size: 16,
+//                           ),
+//                           onPressed: () {},
+//                           margin: EdgeInsets.all(0)),
+//                       // Text("${lv == 3 ? '(nguyên bản)' : ''}")
+//                     ],
+//                   ),
+//                 ))
+//           ],
+//         )
+//       ],
+//     ),
+//   );
+// }
 
-Widget buildRecipe() {
-  List listRecipe = [
-    {
-      'image':
-          'https://cdn.huongnghiepaau.com/wp-content/uploads/2017/10/uop-ga-cung-gia-vi.jpg',
-      'description':
-          "bạn trộn nước xốt ướp gà theo công thức: 2 muỗng canh nước mắm, 1 muỗng cà phê muối, 2 muỗng canh dầu ăn, 2 muỗng cà phê đường, 1 muỗng cà phê bột ngọt, 1/2 muỗng cà phê tiêu, 4 trái ớt giã nhuyễn, khuấy đều."
-    },
-    {
-      'image':
-          'https://cdn.huongnghiepaau.com/wp-content/uploads/2017/10/nuong-ga.jpg',
-      'description':
-          'Sau khoảng thời gian ướp, bạn lấy gà ra ngoài, đặt lên vỉ nướng trên bếp than hoa. Mẹo nhỏ trong cách làm gà nướng muối ớt mà không phải ai cũng biết là bạn nên nướng gà với lửa nhỏ, vì lửa lớn rất dễ làm lớp da bên ngoài bị cháy còn thịt bên trong còn sống.'
-    },
-    {
-      'image':
-          'https://thuvienamthuc.vn/app_images/news/2020/6/30/cach-lam-ga-nuong-muoi-ot-ngon-800-153822.jpg',
-      'description': 'Trình Bày Và Thưởng Thức'
-    },
-  ];
-  int counter = 0;
-  return Container(
-    margin: EdgeInsets.only(top: 12),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Hướng dẫn",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        ...listRecipe.map((
-          v,
-        ) =>
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Bước ${++counter}"),
-                  Container(
-                    width: 170,
-                    child: Material(
-                      elevation: 10,
-                      child: Image.network('${v['image']}'),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      "${v['description']}",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  )
-                ],
-              ),
-            ))
-        // Column(
-        //   children: [
-        //     Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
+// Widget buildRecipe() {
+//   List listRecipe = [
+//     {
+//       'image':
+//           'https://cdn.huongnghiepaau.com/wp-content/uploads/2017/10/uop-ga-cung-gia-vi.jpg',
+//       'description':
+//           "bạn trộn nước xốt ướp gà theo công thức: 2 muỗng canh nước mắm, 1 muỗng cà phê muối, 2 muỗng canh dầu ăn, 2 muỗng cà phê đường, 1 muỗng cà phê bột ngọt, 1/2 muỗng cà phê tiêu, 4 trái ớt giã nhuyễn, khuấy đều."
+//     },
+//     {
+//       'image':
+//           'https://cdn.huongnghiepaau.com/wp-content/uploads/2017/10/nuong-ga.jpg',
+//       'description':
+//           'Sau khoảng thời gian ướp, bạn lấy gà ra ngoài, đặt lên vỉ nướng trên bếp than hoa. Mẹo nhỏ trong cách làm gà nướng muối ớt mà không phải ai cũng biết là bạn nên nướng gà với lửa nhỏ, vì lửa lớn rất dễ làm lớp da bên ngoài bị cháy còn thịt bên trong còn sống.'
+//     },
+//     {
+//       'image':
+//           'https://thuvienamthuc.vn/app_images/news/2020/6/30/cach-lam-ga-nuong-muoi-ot-ngon-800-153822.jpg',
+//       'description': 'Trình Bày Và Thưởng Thức'
+//     },
+//   ];
+//   int counter = 0;
+//   return Container(
+//     margin: EdgeInsets.only(top: 12),
+//     child: Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(
+//           "Hướng dẫn",
+//           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+//         ),
+//         SizedBox(
+//           height: 12,
+//         ),
+//         ...listRecipe.map((
+//           v,
+//         ) =>
+//             Container(
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text("Bước ${++counter}"),
+//                   Container(
+//                     width: 170,
+//                     child: Material(
+//                       elevation: 10,
+//                       child: Image.network('${v['image']}'),
+//                     ),
+//                   ),
+//                   Container(
+//                     margin: EdgeInsets.symmetric(vertical: 10),
+//                     child: Text(
+//                       "${v['description']}",
+//                       style: TextStyle(fontSize: 14),
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             ))
+//         // Column(
+//         //   children: [
+//         //     Column(
+//         //       crossAxisAlignment: CrossAxisAlignment.start,
+//         //       children: [
 
-        //       ],
-        //     )
-        //   ],
-        // )
-      ],
-    ),
-  );
-}
+//         //       ],
+//         //     )
+//         //   ],
+//         // )
+//       ],
+//     ),
+//   );
+// }
 
 showButtonModalSheet(BuildContext context, DishDetailController controller) {
   CartController cartController = Get.find<CartController>();

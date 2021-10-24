@@ -31,9 +31,6 @@ class HomeScreen extends StatelessWidget {
   final MenuDetailController controller =
       Get.put(MenuDetailController(categoryID: 2));
   final DishDetailController controller2 = Get.put(DishDetailController());
-  // final OrderDetailController controllerdd = Get.put(OrderDetailController());
-
-  // final OrderController controllerOrder = Get.put(OrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -175,40 +172,40 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 274,
-                      width: 1200,
-                      child: GetBuilder<OrderController>(
-                        builder: (controller) => ListView.builder(
-                          // itemCount: controller.order.items!.length,
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            // return PopularItemsCard(
-                            //   dish: controller.listItem[index],
-                            // );
+                    // Container(
+                    //   height: 274,
+                    //   width: 1200,
+                    //   child: GetBuilder<OrderController>(
+                    //     builder: (controller) => ListView.builder(
+                    //       // itemCount: controller.order.items!.length,
+                    //       itemCount: 1,
+                    //       itemBuilder: (context, index) {
+                    //         // return PopularItemsCard(
+                    //         //   dish: controller.listItem[index],
+                    //         // );
 
-                            return Container(
-                                child: Column(
-                              children: [
-                                Text(controller.order.items!.first.date
-                                    .toString()),
-                                Text(controller.order.items!.first.id
-                                    .toString()),
-                                Text(controller.order.items!.first.paymentName
-                                    .toString()),
-                                // Text(
-                                //   controller.order.items!.first.date.toString(),
-                                // ),
-                              ],
-                            ));
-                          },
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.only(left: 16),
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                        ),
-                      ),
-                    ),
+                    //         return Container(
+                    //             child: Column(
+                    //           children: [
+                    //             Text(controller.order.items!.first.date
+                    //                 .toString()),
+                    //             Text(controller.order.items!.first.id
+                    //                 .toString()),
+                    //             Text(controller.order.items!.first.paymentName
+                    //                 .toString()),
+                    //             // Text(
+                    //             //   controller.order.items!.first.date.toString(),
+                    //             // ),
+                    //           ],
+                    //         ));
+                    //       },
+                    //       scrollDirection: Axis.horizontal,
+                    //       // padding: EdgeInsets.only(left: 16),
+                    //       shrinkWrap: true,
+                    //       physics: BouncingScrollPhysics(),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 5,
                     ),

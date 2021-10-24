@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginController controllerLogin = Get.put(LoginController());
-  static const routeName = '/login_screen';
-
 
   @override
   Widget build(BuildContext context) {
@@ -109,16 +107,13 @@ class LoginScreen extends StatelessWidget {
                   margin: EdgeInsets.only(top: 50.0),
                   child: RaisedButton(
                     onPressed: () {
-                     
                       controllerLogin.login();
-
                     }, // When Click on Button goto Login Screen
 
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
                     padding: const EdgeInsets.all(0.0),
                     child: Ink(
-                      
                       decoration: const BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.all(Radius.circular(5)),

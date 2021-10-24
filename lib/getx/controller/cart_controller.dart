@@ -70,7 +70,7 @@ class CartController extends GetxController {
   Future<DishResponse> getDishByTaste(DishResponse oldDish) async {
     DishResponse dish;
     final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes/dishTaste?store_id=1&dish_id=18&taste_id=1&taste_level=2'));
+        'http://54.255.129.30:8100/api/v1/user/dishes/dishTaste?store_id=1&dish_id=18&taste_id=1&taste_level=1'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
