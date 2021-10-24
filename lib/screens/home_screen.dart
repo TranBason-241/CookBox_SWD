@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
             child: TextField(
                 autofocus: false,
                 onTap: () {
-                  Navigator.pushNamed(context, SearchScreen.routeName);
+                 Get.to(SearchScreen());
                 },
                 decoration: InputDecoration(
                   hintText: 'Tìm kiếm sản phẩm, công thức',
@@ -167,40 +167,6 @@ class HomeScreen extends StatelessWidget {
                             return PopularItemsCard(
                               dish: controller.listItem[index],
                             );
-                          },
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.only(left: 16),
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 274,
-                      width: 1200,
-                      child: GetBuilder<OrderController>(
-                        builder: (controller) => ListView.builder(
-                          // itemCount: controller.order.items!.length,
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            // return PopularItemsCard(
-                            //   dish: controller.listItem[index],
-                            // );
-
-                            return Container(
-                                child: Column(
-                              children: [
-                                Text(controller.order.items!.first.date
-                                    .toString()),
-                                Text(controller.order.items!.first.id
-                                    .toString()),
-                                Text(controller.order.items!.first.paymentName
-                                    .toString()),
-                                // Text(
-                                //   controller.order.items!.first.date.toString(),
-                                // ),
-                              ],
-                            ));
                           },
                           scrollDirection: Axis.horizontal,
                           // padding: EdgeInsets.only(left: 16),
