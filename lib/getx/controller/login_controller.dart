@@ -73,7 +73,7 @@ class LoginController extends GetxController {
         final responseData = json.decode(response.body);
 
         var token = responseData['token'];
-
+        
         prefs.setString('token', token);
         //  prefs.setString('token', token);
         // print('Hello Dat');
