@@ -173,117 +173,118 @@ class _SearchScreenState extends State<SearchScreen> {
           Container(
             child: Obx(() => Text(searchController.messSearch.value)),
           ),
-          Container(
-            padding: EdgeInsetsDirectional.all(5),
-            // color: Colors.green,
-
-            height: 500,
-            width: 400,
-            child: GetBuilder<SearchController>(
-              builder: (controller) => ListView.builder(
-                itemCount: controller.listMenuDetail.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 110,
-                              width: 110,
-                              child: Image.network(
-                                controller.listMenuDetail[index].image,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(left: 15, right: 5),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    // color: Colors.yellow,
-                                    width: 200,
-                                    height: 110,
-                                    child: Stack(
-                                      children: [
-                                        Positioned(
-                                            top: 0,
-                                            left: 5,
-                                            child: Text(
-                                              "${controller.listMenuDetail[index].name}",
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black
-                                                      .withOpacity(0.7)),
-                                            )),
-                                        Positioned(
-                                          top: 30,
-                                          left: 5,
-                                          child: Text(
-                                              "${controller.listMenuDetail[index].description}",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black)),
-                                        ),
-                                        Positioned(
-                                          top: 50,
-                                          left: 5,
-                                          child: Text("3 người ăn",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.black)),
-                                        ),
-                                        Positioned(
-                                            top: 85,
-                                            left: 5,
-                                            child: Text(
-                                              "${controller.listMenuDetail[index].price}đ",
-                                              style: TextStyle(
-                                                  fontSize: 22,
-                                                  color: Colors.green),
-                                            )),
-                                        // Positioned(
-                                        //     top: 33,
-                                        //     left: 5,
-                                        //     child: Text(
-                                        //       "$address",
-                                        //       style: TextStyle(fontSize: 12),
-                                        //     )),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.add_circle,
-                                  size: 34,
-                                  color: Colors.red,
+          Expanded(
+            child: Container(
+              padding: EdgeInsetsDirectional.all(5),
+              // color: Colors.green,
+              height: 100,
+              width: 400,
+              child: GetBuilder<SearchController>(
+                builder: (controller) => ListView.builder(
+                  itemCount: controller.listMenuDetail.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 110,
+                                width: 110,
+                                child: Image.network(
+                                  controller.listMenuDetail[index].image,
+                                  fit: BoxFit.cover,
                                 ),
-                                onPressed: () {
-                                  // cart.addToCart(dish);
-                                  // print(cart.getCart()[dish.dishID]?.quantity);
-                                },
                               ),
-                            ),
-                          ],
+                              Container(
+                                padding: EdgeInsets.only(left: 15, right: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      // color: Colors.yellow,
+                                      width: 200,
+                                      height: 110,
+                                      child: Stack(
+                                        children: [
+                                          Positioned(
+                                              top: 0,
+                                              left: 5,
+                                              child: Text(
+                                                "${controller.listMenuDetail[index].name}",
+                                                style: TextStyle(
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black
+                                                        .withOpacity(0.7)),
+                                              )),
+                                          Positioned(
+                                            top: 30,
+                                            left: 5,
+                                            child: Text(
+                                                "${controller.listMenuDetail[index].description}",
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black)),
+                                          ),
+                                          Positioned(
+                                            top: 50,
+                                            left: 5,
+                                            child: Text("3 người ăn",
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black)),
+                                          ),
+                                          Positioned(
+                                              top: 85,
+                                              left: 5,
+                                              child: Text(
+                                                "${controller.listMenuDetail[index].price}đ",
+                                                style: TextStyle(
+                                                    fontSize: 22,
+                                                    color: Colors.green),
+                                              )),
+                                          // Positioned(
+                                          //     top: 33,
+                                          //     left: 5,
+                                          //     child: Text(
+                                          //       "$address",
+                                          //       style: TextStyle(fontSize: 12),
+                                          //     )),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.add_circle,
+                                    size: 34,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    // cart.addToCart(dish);
+                                    // print(cart.getCart()[dish.dishID]?.quantity);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Divider(
-                        height: 10,
-                        color: Colors.black,
-                      ),
-                    ],
-                  );
-                },
-                scrollDirection: Axis.vertical,
-                // padding: EdgeInsets.only(left: 16),
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                        Divider(
+                          height: 10,
+                          color: Colors.black,
+                        ),
+                      ],
+                    );
+                  },
+                  scrollDirection: Axis.vertical,
+                  // padding: EdgeInsets.only(left: 16),
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                ),
               ),
             ),
           ),

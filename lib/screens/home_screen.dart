@@ -1,6 +1,8 @@
+import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/dish_detail_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/order_detail_controller.dart';
+import 'package:app/getx/controller/search_controller.dart';
 import 'package:app/models/detail_dish.dart';
 import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
@@ -33,7 +35,7 @@ class HomeScreen extends StatelessWidget {
   final DishDetailController controller2 = Get.put(DishDetailController());
   // final OrderDetailController controllerdd = Get.put(OrderDetailController());
 
-  // final OrderController controllerOrder = Get.put(OrderController());
+  final SearchController searchController = Get.put(SearchController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             child: TextField(
                 autofocus: false,
                 onTap: () {
-                 Get.to(SearchScreen());
+                  Get.to(SearchScreen());
                 },
                 decoration: InputDecoration(
                   hintText: 'Tìm kiếm sản phẩm, công thức',
@@ -145,7 +147,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              searchController.viewMore(2);
+                              Get.to(SearchScreen());
+                            },
                             child: const Text(
                               "Xem tất cả",
                               style: TextStyle(

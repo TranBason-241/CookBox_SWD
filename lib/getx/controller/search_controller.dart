@@ -16,6 +16,7 @@ class SearchController extends GetxController {
   onInit() {
     super.onInit();
     fetchCate();
+    search();
   }
 
   Future<List<DishCategory>> fetchCate() async {
@@ -80,6 +81,35 @@ class SearchController extends GetxController {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
+      listMenuDetail = [];
+      update();
+      messSearch.value = 'Không có sản phẩm';
+      throw Exception('Failed to load category');
+    }
+  }
+
+   Future<MenuDetail> viewMore(int id) async {
+    final response = await http.get(Uri.parse(
+        'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=${id}'));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      List<MenuDetail> list = [];
+      menuDetailRespone =
+          dishTestFromJson(response.body); //Tra ve 1 obj DishTest
+      listMenuDetail = menuDetailRespone.items as List<Item>;
+      print(listMenuDetail[0].name);
+      update();
+      messSearch.value = '';
+      setSelected(id);
+      // textEditingController.value = '';
+      return menuDetailRespone;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      listMenuDetail = [];
+      update();
       messSearch.value = 'Không có sản phẩm';
       throw Exception('Failed to load category');
     }

@@ -1,4 +1,5 @@
 import 'package:app/getx/controller/home_controller.dart';
+import 'package:app/screens/account_screen.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/notify_screen.dart';
@@ -20,8 +21,8 @@ class Home extends StatelessWidget {
               // DishTestScreen(),
               OrderScreen(),
               NotifyScreen(),
-              CartScreen(),
-              SearchScreen(),
+              AccountScreen()
+              // SearchScreen(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

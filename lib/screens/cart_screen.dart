@@ -2,6 +2,7 @@
 // import '/screens/payment_screen.dart';
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
+import 'package:app/screens/home.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class CartScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(HomeScreen());
+              Get.to(Home());
             },
           ),
           title: Text("Giỏ hàng của bạn"),
