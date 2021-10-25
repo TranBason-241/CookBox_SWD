@@ -6,12 +6,13 @@ import 'dart:convert';
 
 import 'package:app/models/order_detail.dart';
 
-ResponceOrder orderFromJson(String str) => ResponceOrder.fromJson(json.decode(str));
+ResponseOrder orderFromJson(String str) =>
+    ResponseOrder.fromJson(json.decode(str));
 
-String orderToJson(ResponceOrder data) => json.encode(data.toJson());
+String orderToJson(ResponseOrder data) => json.encode(data.toJson());
 
-class ResponceOrder {
-  ResponceOrder({
+class ResponseOrder {
+  ResponseOrder({
     this.metaData,
     this.items,
   });
@@ -19,7 +20,7 @@ class ResponceOrder {
   MetaData? metaData;
   List<Order>? items;
 
-  factory ResponceOrder.fromJson(Map<String, dynamic> json) => ResponceOrder(
+  factory ResponseOrder.fromJson(Map<String, dynamic> json) => ResponseOrder(
         metaData: MetaData.fromJson(json["metaData"]),
         items: List<Order>.from(json["items"]!.map((x) => Order.fromJson(x))),
       );
@@ -68,7 +69,8 @@ class Order {
         storeName: json["store_name"],
         total: json["total"],
         orderStatus: json["order_status"],
-        orderDetails: List<OrderDetail>.from(json["orderDetails"].map((x) => x)),
+        orderDetails:
+            List<OrderDetail>.from(json["orderDetails"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -82,20 +84,21 @@ class Order {
         "store_name": storeName,
         "total": total,
         "order_status": orderStatus,
-        "orderDetails": List<dynamic>.from(orderDetails!.map((x) => x.toJson())),
+        "orderDetails":
+            List<dynamic>.from(orderDetails!.map((x) => x.toJson())),
       };
 }
 
 class MetaData {
   MetaData({
-     this.currentPage,
-     this.totalPages,
-     this.pageSize,
-     this.totalCount,
-     this.hasPrevious,
-     this.hasNext,
-     this.firstPage,
-     this.lastPage,
+    this.currentPage,
+    this.totalPages,
+    this.pageSize,
+    this.totalCount,
+    this.hasPrevious,
+    this.hasNext,
+    this.firstPage,
+    this.lastPage,
   });
 
   int? currentPage;

@@ -66,7 +66,7 @@ class LoginController extends GetxController {
           Uri.parse("http://54.255.129.30:8100/api/v1/login"),
           headers: {"Content-Type": "application/json"},
           body: body);
-          print('a');
+      print('a');
       if (response.statusCode == 200) {
         print('b');
         var prefs = await SharedPreferences.getInstance();
@@ -78,8 +78,8 @@ class LoginController extends GetxController {
         //  prefs.setString('token', token);
         // print('Hello Dat');
         update();
-        Get.back();
-        Get.to(Home());
+        // Get.back();
+        Get.off(Home());
       }
 
       //  var response2 = await http.get(

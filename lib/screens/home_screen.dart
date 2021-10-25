@@ -4,6 +4,7 @@ import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/models/detail_dish.dart';
 import 'package:app/providers/cart.dart';
 import 'package:app/screens/cart_screen.dart';
+import 'package:app/screens/order/new_order_screen.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:app/screens/search_screen.dart';
 import 'package:app/getx/controller/menu_detail_controller.dart';
@@ -14,26 +15,99 @@ import 'package:app/widgets/listview_popular.dart';
 import 'package:app/widgets/popular_item.dart';
 import 'package:app/widgets/product_grid.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
+class LocalNotificationService {
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  static void initialize() {
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: AndroidInitializationSettings('@mipmap/ic_launcher'));
+    _notificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: (String? route) async {
+      if (route != null) {
+        print("object ne bn oi" + route);
+        // Get.to(OrderScreen(), binding: OrderBinding());
+        // Get.to(route);
+        Get.toNamed(route);
+      }
+    });
+  }
+
+  static void display(RemoteMessage message) async {
+    try {
+      final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      const NotificationDetails notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails('cookbox', 'cookbox channel',
+            importance: Importance.max, priority: Priority.high),
+      );
+      await _notificationsPlugin.show(
+        id,
+        message.notification!.title,
+        message.notification!.title,
+        notificationDetails,
+        payload: message.data['route'],
+      );
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+  }
+}
+
+class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final List<String> images = [
     'https://cf.shopee.vn/file/b19a4998332c28c3fe1014429f12b2c5',
     'https://cdn.chanhtuoi.com/uploads/2021/07/foodmap.jpg',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD-qQL9OpIzo1logABt9hiMAEz0gpviVf8jA&usqp=CAU',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvabEVjmLblf-tX64eNpj6ZRtl_IH1weF_A&usqp=CAU',
   ];
-  // final DishController controller = Get.put(DishController(categoryID: 1));
+
   final MenuDetailController controller =
       Get.put(MenuDetailController(categoryID: 2));
-  final DishDetailController controller2 = Get.put(DishDetailController());
-  // final OrderDetailController controllerdd = Get.put(OrderDetailController());
 
-  // final OrderController controllerOrder = Get.put(OrderController());
+  final DishDetailController controller2 = Get.put(DishDetailController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        final routeFromMessage = message.data['route'];
+        // Get.to(OrderScreen(), binding: OrderBinding());
+        print(routeFromMessage + 'Hlsssslo');
+        Get.toNamed(routeFromMessage);
+      }
+    });
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        print(message.notification!.body);
+        print(message.notification!.title);
+        LocalNotificationService.display(message);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data['route'];
+      // Get.to(OrderScreen(), binding: OrderBinding());
+      // Get.to(routeFromMessage);
+      print(routeFromMessage + 'Hllo');
+      Get.toNamed(routeFromMessage);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

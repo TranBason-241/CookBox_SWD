@@ -1,23 +1,30 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
 import 'package:app/screens/home.dart';
-import 'package:app/screens/order_screen.dart';
-import 'dart:math';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+// class OrderBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.put(OrderController);
+//   }
+// }
 
 class OrderController extends GetxController {
-  var orderCreate = ResponceOrder();
-  var statusCreate = 1.obs; 
+  var orderCreate = ResponseOrder();
+  var statusCreate = 1.obs;
   // 1 default, 2 ok, 3 failed
   // List<Item> listItem = <Item>[].obs;
   // RxList<Item> productList = <Item>[].obs;
   // RxList<Order> order = <Order>[].obs;
   // List<Order> order = <Order>[].obs;
-  var order = ResponceOrder();
-  
+  var order = ResponseOrder();
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -27,19 +34,35 @@ class OrderController extends GetxController {
 
   // var order = new Order();
   // Future<Order> fetchOrder() async {
-  Future<ResponceOrder> fetchOrder() async {
-    final response = await http
-        .get(Uri.parse('http://54.255.129.30:8100/api/v1/user/orders'));
+
+  Future<ResponseOrder> fetchOrder() async {
+    final response = await http.get(Uri.parse(
+        'http://54.255.129.30:8100/api/v1/user/orders?user_id=1&page_number=1&page_size=100'));
     if (response.statusCode == 200) {
       print("ALOOO");
       order = orderFromJson(response.body);
       print(order.items!.length.toString());
-      Get.to(OrderScreen());
+      // Get.to(OrderScreen());
       update();
 
       return order;
     } else {
       throw Exception("Fail to load order");
+    }
+  }
+
+  Future<void> cancelOrder(int id) async {
+    final response = await http.put(Uri.parse(
+        'http://54.255.129.30:8100/api/v1/user/orders/cancel?id=$id'));
+    if (response.statusCode == 200) {
+      print('Delete ok');
+      // update();
+      print('object');
+      // Get.to(DishDetailScreen());
+      fetchOrder();
+      update();
+    } else {
+      throw Exception("Fail to loading dish detail");
     }
   }
 

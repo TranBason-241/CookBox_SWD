@@ -2,25 +2,30 @@ import 'package:app/models/order_detail.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+class OrderDetailBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(OrderDetailController());
+  }
+}
+
 class OrderDetailController extends GetxController {
   var orderDetail = ResponceOrderDetail();
+  var orderId = 2;
 
   @override
   void onInit() {
     super.onInit();
-    fetchOrderDetail();
+    orderId = Get.arguments['orderId'];
+    fetchOrderDetail(orderId);
   }
 
-  Future<ResponceOrderDetail> fetchOrderDetail() async {
-    final response = await http.get(
-        Uri.parse('http://54.255.129.30:8100/api/v1/user/orders/orderDetail'));
+  Future<ResponceOrderDetail> fetchOrderDetail(int id) async {
+    final response = await http.get(Uri.parse(
+        'http://54.255.129.30:8100/api/v1/user/orders/orderDetail?order_id=$id'));
     if (response.statusCode == 200) {
-      print("ALOOO");
       orderDetail = orderDetailFromJson(response.body);
-      // Get.to(OrderScreen());
-      print("object");
       update();
-
       return orderDetail;
     } else {
       throw Exception("Fail to order detail");
