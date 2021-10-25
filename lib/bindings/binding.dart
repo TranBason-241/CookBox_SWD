@@ -4,6 +4,7 @@ import 'package:app/getx/controller/notify_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/getx/controller/menu_detail_controller.dart';
+import 'package:app/getx/controller/search_controller.dart';
 import 'package:app/screens/order/new_order_screen.dart';
 import 'package:get/get.dart';
 
