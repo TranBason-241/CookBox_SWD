@@ -4,18 +4,19 @@
 
 import 'dart:convert';
 
-MenuDetail dishTestFromJson(String str) => MenuDetail.fromJson(json.decode(str));
+MenuDetail dishTestFromJson(String str) =>
+    MenuDetail.fromJson(json.decode(str));
 
 String dishTestToJson(MenuDetail data) => json.encode(data.toJson());
 
 class MenuDetail {
   MenuDetail({
-    required this.metaData,
-    required this.items,
+    this.metaData,
+    this.items,
   });
 
-  MetaData metaData;
-  List<Item> items;
+  MetaData? metaData;
+  List<Item>? items;
 
   factory MenuDetail.fromJson(Map<String, dynamic> json) => MenuDetail(
         metaData: MetaData.fromJson(json["metaData"]),
@@ -23,8 +24,8 @@ class MenuDetail {
       );
 
   Map<String, dynamic> toJson() => {
-        "metaData": metaData.toJson(),
-        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+        "metaData": metaData!.toJson(),
+        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
       };
 }
 
@@ -33,8 +34,8 @@ class Item {
     required this.id,
     required this.name,
     required this.price,
-    // required this.description,
-    // required this.categoryName,
+    required this.description,
+    required this.categoryName,
     // required this.status,
     // required this.nutrientDes,
     required this.image,
@@ -43,10 +44,10 @@ class Item {
   int id;
   String name;
   double price;
-  // String description;
-  // String categoryName;
+  String description;
+  String categoryName;
   // bool status;
-  
+
   // String nutrientDes;
   String image;
 
@@ -55,8 +56,8 @@ class Item {
         name: json['dish']["name"],
         price: json["price"].toDouble(),
         image: json['dish']["image"],
-        // description: json["description"],
-        // categoryName: json["categoryName"],
+        description: json['dish']["description"],
+        categoryName: json["categoryName"],
         // status: json["status"],
         // nutrientDes: json["nutrient_des"] == null ? null : json["nutrient_des"],
         // image: json["image"] == null ? null : json["image"],
@@ -66,8 +67,8 @@ class Item {
         "id": id,
         "name": name,
         "price": price,
-        // "description": description,
-        // "categoryName": categoryName,
+        "description": description,
+        "categoryName": categoryName,
         // "status": status,
         // "nutrient_des": nutrientDes == null ? null : nutrientDes,
         "image": image == null ? null : image,

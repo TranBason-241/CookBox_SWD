@@ -16,5 +16,6 @@ class Binding implements Bindings {
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => NotifyController());
     Get.lazyPut(() => MenuDetailController());
+    Get.lazyPut(() => SearchController());
   }
 }
