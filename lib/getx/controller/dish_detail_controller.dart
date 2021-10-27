@@ -38,7 +38,7 @@ class DishDetailController extends GetxController {
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes/dish?store_id=1&dish_id=18'),
+            'http://54.255.129.30:8100/api/v1/user/dishes/dishparent?store_id=1&dish_id=18'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
