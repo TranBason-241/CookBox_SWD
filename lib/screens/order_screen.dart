@@ -24,37 +24,37 @@ class OrderScreen extends StatelessWidget {
           // ),
           child: Column(
             children: [
-              Container(
-                height: 274,
-                child: GetBuilder<OrderController>(
-                  builder: (controller) => ListView.builder(
-                    // itemCount: controller.order.items!.length,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      // return PopularItemsCard(
-                      //   dish: controller.listItem[index],
-                      // );
+              // Container(
+              //   height: 274,
+              //   child: GetBuilder<OrderController>(
+              //     builder: (controller) => ListView.builder(
+              //       // itemCount: controller.order.items!.length,
+              //       itemCount: 1,
+              //       itemBuilder: (context, index) {
+              //         // return PopularItemsCard(
+              //         //   dish: controller.listItem[index],
+              //         // );
 
-                      return Container(
-                          child: Column(
-                        children: [
-                          Text(controller.order.items!.first.date.toString()),
-                          Text(controller.order.items!.first.id.toString()),
-                          Text(controller.order.items!.first.paymentName
-                              .toString()),
-                          // Text(
-                          //   controller.order.items!.first.date.toString(),
-                          // ),
-                        ],
-                      ));
-                    },
-                    scrollDirection: Axis.horizontal,
-                    // padding: EdgeInsets.only(left: 16),
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                  ),
-                ),
-              ),
+              //         return Container(
+              //             child: Column(
+              //           children: [
+              //             Text(controller.order.items!.first.date.toString()),
+              //             Text(controller.order.items!.first.id.toString()),
+              //             Text(controller.order.items!.first.paymentName
+              //                 .toString()),
+              //             // Text(
+              //             //   controller.order.items!.first.date.toString(),
+              //             // ),
+              //           ],
+              //         ));
+              //       },
+              //       scrollDirection: Axis.horizontal,
+              //       // padding: EdgeInsets.only(left: 16),
+              //       shrinkWrap: true,
+              //       physics: BouncingScrollPhysics(),
+              //     ),
+              //   ),
+              // ),
               Container(
                 height: 274,
                 child: GetBuilder<OrderDetailController>(

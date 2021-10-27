@@ -1,14 +1,17 @@
+import 'package:app/getx/controller/login_controller.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/login_screen.dart';
+import 'package:app/screens/info_screen.dart';
 import 'package:app/widgets/custom_navbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  // const AccountScreen({Key? key}) : super(key: key);
   static const routeName = '/account';
-
+  LoginController controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,38 +101,43 @@ class AccountScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: SizedBox(
-                  height: 50,
-                  child: Row(
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Color(0xffcccccb),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: FittedBox(
-                            child: Icon(
-                              Icons.account_circle,
-                              color: Colors.black,
+                child: InkWell(
+                  onTap: () {
+                    Get.to(InforScreen());
+                  },
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      children: const [
+                        CircleAvatar(
+                          backgroundColor: Color(0xffcccccb),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: FittedBox(
+                              child: Icon(
+                                Icons.account_circle,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Thông tin cá nhân',
-                        style: TextStyle(
-                          fontSize: 16,
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: Color(0xffcccccb),
-                        size: 15,
-                      ),
-                    ],
+                        Text(
+                          'Thông tin cá nhân',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          color: Color(0xffcccccb),
+                          size: 15,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -173,7 +181,7 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ),
               ),
-             
+
               Divider(
                 color: Color(0xffcccccb),
               ),
@@ -294,7 +302,7 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ),
               ),
-             
+
               Divider(
                 color: Color(0xffcccccb),
               ),
@@ -302,36 +310,41 @@ class AccountScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: SizedBox(
                   height: 50,
-                  child: Row(
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Color(0xffcccccb),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: FittedBox(
-                            child: Icon(
-                              Icons.login_outlined,
-                              color: Colors.black,
+                  child: InkWell(
+                    onTap: () {
+                      controller.logout();
+                    },
+                    child: Row(
+                      children: const [
+                        CircleAvatar(
+                          backgroundColor: Color(0xffcccccb),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: FittedBox(
+                              child: Icon(
+                                Icons.login_outlined,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Đăng xuất',
-                        style: TextStyle(
-                          fontSize: 16,
+                        SizedBox(
+                          width: 10,
                         ),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios_outlined,
-                        color: Color(0xffcccccb),
-                        size: 15,
-                      ),
-                    ],
+                        Text(
+                          'Đăng xuất',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          color: Color(0xffcccccb),
+                          size: 15,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

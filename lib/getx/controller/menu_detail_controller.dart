@@ -2,6 +2,7 @@ import 'package:app/models/menu_detail.dart';
 import 'package:http/http.dart' as http;
 // import 'package:app/testCallApi/dish_test_screen.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuDetailController extends GetxController {
   List<Item> listItem = <Item>[].obs;
@@ -18,8 +19,16 @@ class MenuDetailController extends GetxController {
 
   Future<List<Item>> fetchDish() async {
     isLoading(false);
-    final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=2'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=2'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
 
     print(categoryID);
     if (response.statusCode == 200) {

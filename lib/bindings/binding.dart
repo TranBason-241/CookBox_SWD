@@ -4,6 +4,7 @@ import 'package:app/getx/controller/notify_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/getx/controller/search_controller.dart';
+import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/screens/login_screen.dart';
 import 'package:app/getx/controller/menu_detail_controller.dart';
 import 'package:get/get.dart';
@@ -21,5 +22,6 @@ class Binding implements Bindings {
     Get.lazyPut(() => NotifyController());
     Get.lazyPut(() => MenuDetailController());
     Get.lazyPut(() => SearchController());
+    Get.lazyPut(() => UserController());
   }
 }

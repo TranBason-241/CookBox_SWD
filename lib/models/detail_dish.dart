@@ -10,22 +10,21 @@ DishResponse dishResponseFromJson(String str) =>
 String dishResponseToJson(DishResponse data) => json.encode(data.toJson());
 
 class DishResponse {
-  DishResponse({
-    this.id,
-    this.name,
-    this.description,
-    this.image,
-    this.categoryId,
-    this.categoryName,
-    this.status,
-    this.parentId,
-    this.price,
-    this.dishIngredients,
-    this.nutrientDetails,
-    this.repices,
-    this.tasteDetails,
-    this.quantity = 0
-  });
+  DishResponse(
+      {this.id,
+      this.name,
+      this.description,
+      this.image,
+      this.categoryId,
+      this.categoryName,
+      this.status,
+      this.parentId,
+      this.price,
+      this.dishIngredients,
+      this.nutrientDetails,
+      this.repices,
+      this.tasteDetails,
+      this.quantity = 0});
 
   int? id;
   String? name;
@@ -200,6 +199,7 @@ class TasteDetail {
     this.tasteName,
     this.tasteLevel,
     this.tasteId,
+    
   });
 
   int? id;
@@ -221,3 +221,37 @@ class TasteDetail {
         "taste_id": tasteId,
       };
 }
+
+// To parse this JSON data, do
+//
+//     final dishFind = dishFindFromJson(jsonString);
+
+
+DishFind dishFindFromJson(String str) => DishFind.fromJson(json.decode(str));
+
+String dishFindToJson(DishFind data) => json.encode(data.toJson());
+
+class DishFind {
+    DishFind({
+        this.storeId,
+        this.dishId,
+        this.listTaste,
+    });
+
+    int? storeId;
+    int? dishId;
+    List<TasteDetail>? listTaste;
+
+    factory DishFind.fromJson(Map<String, dynamic> json) => DishFind(
+        storeId: json["store_id"],
+        dishId: json["dish_id"],
+        listTaste: List<TasteDetail>.from(json["list_taste"].map((x) => TasteDetail.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "store_id": storeId,
+        "dish_id": dishId,
+        "list_taste": List<dynamic>.from(listTaste!.map((x) => x.toJson())),
+    };
+}
+

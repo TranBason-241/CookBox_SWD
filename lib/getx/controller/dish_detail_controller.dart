@@ -6,6 +6,7 @@ import 'package:app/screens/product_detail.dart';
 import 'package:http/http.dart' as http;
 // import 'package:app/testCallApi/dish_test_screen.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DishDetailController extends GetxController {
   var isLoading = false.obs;
@@ -18,13 +19,13 @@ class DishDetailController extends GetxController {
   //   fetchDish();
   // }
   void setQuantity(String type) {
-    if(type.compareTo('reset') == 0){
+    if (type.compareTo('reset') == 0) {
       quantity.value = 1;
     }
     if (type.compareTo('add') == 0) {
       quantity += 1;
       dish.quantity = dish.quantity! + 1;
-    } else  {
+    } else {
       if (quantity == 1) return;
       quantity -= 1;
       dish.quantity = dish.quantity! - 1;
@@ -33,8 +34,16 @@ class DishDetailController extends GetxController {
 
   Future<DishResponse> fetchDishDetail(int id) async {
     isLoading(false);
-    final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes/dish?store_id=1&dish_id=18'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/dishes/dish?store_id=1&dish_id=18'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

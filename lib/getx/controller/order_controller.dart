@@ -8,16 +8,18 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class OrderController extends GetxController {
   var orderCreate = ResponceOrder();
-  var statusCreate = 1.obs; 
+  var statusCreate = 1.obs;
   // 1 default, 2 ok, 3 failed
   // List<Item> listItem = <Item>[].obs;
   // RxList<Item> productList = <Item>[].obs;
   // RxList<Order> order = <Order>[].obs;
   // List<Order> order = <Order>[].obs;
   var order = ResponceOrder();
-  
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -28,8 +30,15 @@ class OrderController extends GetxController {
   // var order = new Order();
   // Future<Order> fetchOrder() async {
   Future<ResponceOrder> fetchOrder() async {
-    final response = await http
-        .get(Uri.parse('http://54.255.129.30:8100/api/v1/user/orders'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse('http://54.255.129.30:8100/api/v1/user/orders'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
     if (response.statusCode == 200) {
       print("ALOOO");
       order = orderFromJson(response.body);
@@ -75,12 +84,14 @@ class OrderController extends GetxController {
   Future createOrderApi(Order order) async {
     Map<String, dynamic> json1 = order.toJson();
     String body = json.encode(json1);
-    print(body);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
     final response = await http.post(
         Uri.parse('http://54.255.129.30:8100/api/v1/user/orders'),
         headers: {
           "Accept": "application/json",
-          "content-type": "application/json"
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
         },
         body: body);
     // print(response.statusCode);

@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:app/getx/controller/user_controller.dart';
+import 'package:app/models/user.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login_screen.dart';
+import 'package:app/screens/required_number_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +43,7 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
+    var prefs = await SharedPreferences.getInstance();
     try {
       // Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
 
@@ -60,26 +64,51 @@ class LoginController extends GetxController {
           await FirebaseAuth.instance.signInWithCredential(credential);
       firebaseUser = userCredentialData.user!;
       var idToken = await firebaseUser.getIdToken();
+
+      prefs.setString('email', firebaseUser.email!);
       Map data = {'token': idToken};
       var body = json.encode(data);
       var response = await http.post(
           Uri.parse("http://54.255.129.30:8100/api/v1/login"),
           headers: {"Content-Type": "application/json"},
           body: body);
-          print('a');
       if (response.statusCode == 200) {
         print('b');
-        var prefs = await SharedPreferences.getInstance();
         final responseData = json.decode(response.body);
-
         var token = responseData['token'];
-        
+        print('JWT: ${token}');
         prefs.setString('token', token);
-        //  prefs.setString('token', token);
-        // print('Hello Dat');
-        update();
-        Get.back();
-        Get.to(Home());
+
+        //call api lấy user về, xong check xem có sđt chưa  api get user by email
+        UserController controller = Get.put(UserController());
+        //call để nó có User Sẵn
+        String email = firebaseUser.email!;
+        final response2 = await http.get(
+            Uri.parse(
+                'http://54.255.129.30:8100/api/v1/user/accounts/${email}'),
+            headers: {
+              "Accept": "application/json",
+              "content-type": "application/json",
+              "Authorization": "Bearer ${token}"
+            });
+        if (response2.statusCode == 200) {
+          // print("call api getUser");
+          UserLogin userInfo = await userFromJson(response2.body);
+          if (userInfo.phone == null || userInfo.phone!.isEmpty) {
+            // userInfo.phone == null || userInfo.phone!.isEmpty
+            //  || userInfo.phone!.isEmpty
+            update();
+            Get.back();
+            Get.to((RequiredPhoneBumberScreen()));
+          } else {
+            update();
+            Get.back();
+            Get.to(Home());
+          }
+        } else {
+          throw Exception("fail to check phone number");
+        }
+        ;
       }
 
       //  var response2 = await http.get(
@@ -103,13 +132,13 @@ class LoginController extends GetxController {
   }
 
   Future<void> logout() async {
-    // Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    // HomeController controller = Get.find<HomeController>();
+    // controller.tabIndex = 0;
 
-    await firebaseAuth.signOut();
-
-    Get.back();
-
-    // Navigate to Login again
-    Get.offAll(LoginScreen());
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    Get.to(LoginScreen());
   }
 }

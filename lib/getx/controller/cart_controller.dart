@@ -3,6 +3,7 @@ import 'package:app/models/detail_dish.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartController extends GetxController {
   // Cart({required this.total, required this.quantity});
@@ -69,8 +70,16 @@ class CartController extends GetxController {
 
   Future<DishResponse> getDishByTaste(DishResponse oldDish) async {
     DishResponse dish;
-    final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes/dishTaste?store_id=1&dish_id=18&taste_id=1&taste_level=2'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/dishes/dishTaste?store_id=1&dish_id=18&taste_id=1&taste_level=2'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

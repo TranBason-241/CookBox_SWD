@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchController extends GetxController {
   static TextEditingController textEditingController = TextEditingController();
@@ -20,8 +21,15 @@ class SearchController extends GetxController {
   }
 
   Future<List<DishCategory>> fetchCate() async {
-    final response = await http
-        .get(Uri.parse('http://54.255.129.30:8100/api/v1/user/categories'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse('http://54.255.129.30:8100/api/v1/user/categories'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
 
     if (response.statusCode == 200) {
       CategoryRespone obj =
@@ -64,8 +72,16 @@ class SearchController extends GetxController {
   }
 
   Future<MenuDetail> search() async {
-    final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&name=${textEditingController.text}&category_id=${getSelectedCateId()}'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&name=${textEditingController.text}&category_id=${getSelectedCateId()}'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -88,9 +104,17 @@ class SearchController extends GetxController {
     }
   }
 
-   Future<MenuDetail> viewMore(int id) async {
-    final response = await http.get(Uri.parse(
-        'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=${id}'));
+  Future<MenuDetail> viewMore(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.get(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=${id}'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
