@@ -6,6 +6,10 @@ import 'dart:convert';
 
 DishResponse dishResponseFromJson(String str) =>
     DishResponse.fromJson(json.decode(str));
+    
+List<DishResponse> listDishResponeFromJson(String str) =>
+    List<DishResponse>.from(
+        json.decode(str).map((x) => DishResponse.fromJson(x)));
 
 String dishResponseToJson(DishResponse data) => json.encode(data.toJson());
 
@@ -199,7 +203,6 @@ class TasteDetail {
     this.tasteName,
     this.tasteLevel,
     this.tasteId,
-    
   });
 
   int? id;
@@ -226,32 +229,31 @@ class TasteDetail {
 //
 //     final dishFind = dishFindFromJson(jsonString);
 
-
 DishFind dishFindFromJson(String str) => DishFind.fromJson(json.decode(str));
 
 String dishFindToJson(DishFind data) => json.encode(data.toJson());
 
 class DishFind {
-    DishFind({
-        this.storeId,
-        this.dishId,
-        this.listTaste,
-    });
+  DishFind({
+    this.storeId,
+    this.dishId,
+    this.listTaste,
+  });
 
-    int? storeId;
-    int? dishId;
-    List<TasteDetail>? listTaste;
+  int? storeId;
+  int? dishId;
+  List<TasteDetail>? listTaste;
 
-    factory DishFind.fromJson(Map<String, dynamic> json) => DishFind(
+  factory DishFind.fromJson(Map<String, dynamic> json) => DishFind(
         storeId: json["store_id"],
         dishId: json["dish_id"],
-        listTaste: List<TasteDetail>.from(json["list_taste"].map((x) => TasteDetail.fromJson(x))),
-    );
+        listTaste: List<TasteDetail>.from(
+            json["list_taste"].map((x) => TasteDetail.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "store_id": storeId,
         "dish_id": dishId,
         "list_taste": List<dynamic>.from(listTaste!.map((x) => x.toJson())),
-    };
+      };
 }
-

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CartController extends GetxController {
   // Cart({required this.total, required this.quantity});
-
+  List<DishResponse> listChildDish = [];
   Map<int, DishResponse> cart = {};
   var total = 0.0.obs;
 //  @override
@@ -50,7 +50,7 @@ class CartController extends GetxController {
   void addToCart(DishResponse dish, int quantity) {
     DishResponse newDish = DishResponse();
     newDish.id = 1;
-    getDishByTaste(dish).then((value) {
+    getTrueDish(dish).then((value) {
       newDish = value;
       print(newDish.id);
       if (cart.containsKey(newDish.id)) {
@@ -68,13 +68,35 @@ class CartController extends GetxController {
 //   return _listCart;
 // }
 
-  Future<DishResponse> getDishByTaste(DishResponse oldDish) async {
-    DishResponse dish;
+  Future<DishResponse> getTrueDish(DishResponse oldDish) async {
+    DishResponse dish = DishResponse();
+    List<DishResponse> listDish = await getDishByTaste(oldDish);
+    for (int i = 0; i < listDish.length; i++) {
+     
+      bool flag = true;
+      for (int j = 0; j < listDish[i].tasteDetails!.length; j++) {
+        if (listDish[i].tasteDetails![j].tasteId ==
+                oldDish.tasteDetails![j].tasteId &&
+            listDish[i].tasteDetails![j].tasteLevel ==
+                oldDish.tasteDetails![j].tasteLevel) {
+        } else {
+          flag = false;
+        }
+      }
+      if (flag) {
+        dish = listDish[i];
+        return dish;
+      }
+    }
+    return dish;
+  }
+
+  Future<List<DishResponse>> getDishByTaste(DishResponse oldDish) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes/dishTaste?store_id=1&dish_id=18&taste_id=1&taste_level=2'),
+            'http://54.255.129.30:8100/api/v1/user/dishes/dishparentchildren?store_id=1&dish_id=18'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
@@ -83,10 +105,11 @@ class CartController extends GetxController {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      dish = dishResponseFromJson(response.body); //Tra ve 1 obj DishTest
-      print('DDaya ne new id Dish ${dish.id}');
+      // dish = dishResponseFromJson(response.body); //Tra ve 1 obj DishTest
+      // print('DDaya ne new id Dish ${dish.id}');
+      listChildDish = listDishResponeFromJson(response.body);
 
-      return dish;
+      return listChildDish;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

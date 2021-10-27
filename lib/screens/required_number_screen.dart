@@ -78,28 +78,31 @@ class RequiredPhoneBumberScreen extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(top: 20, left: 90, right: 90),
-            child: TextFormField(
-                controller: userController.numberEditingController ,
-                onSaved: (value) {
-                  // userName = value!;
-                },
-                validator: (value) {
-                  if (value!.length < 5) {
-                    return 'more than 5';
-                  } else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  hintText: 'số điện thoại của bạn',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  filled: true,
-                  fillColor: Colors.white,
-                )),
+            child: Form(
+                key: userController.formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: TextFormField(
+                    controller: userController.numberEditingController,
+                    validator: (value) {
+                      if (value!.toString().length != 10) {
+                        return 'Vui lòng nhập số điện đúng';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      userController.numberEditingController.text = value!;
+                    },
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      hintText: 'số điện thoại của bạn',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ))),
           ),
           Padding(
             padding: EdgeInsets.only(top: 10),
@@ -109,12 +112,7 @@ class RequiredPhoneBumberScreen extends StatelessWidget {
                   onPrimary: Colors.white, // foreground
                 ),
                 child: const Text('Cập nhật'),
-                onPressed: () => {
-                  
-                  userController.updateUser('phone_required')
-
-                
-                }),
+                onPressed: () => {userController.updateUser('phone_required')}),
           )
         ],
       )),
