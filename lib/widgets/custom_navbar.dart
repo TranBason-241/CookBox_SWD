@@ -1,7 +1,7 @@
 import 'package:app/screens/account_screen.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/notify_screen.dart';
-import 'package:app/screens/order/order.dart';
+// import 'package:app/screens/order/order.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -88,9 +88,9 @@ class CustomNavbar extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (!order) {
-                    Navigator.of(context)
-                        // .pushReplacementNamed(OrderScreen.routeName);
-                        .pushReplacementNamed(Order.routeName);
+                    // Navigator.of(context)
+                    //     // .pushReplacementNamed(OrderScreen.routeName);
+                    //     .pushReplacementNamed(Order.routeName);
                   }
                 },
                 child: Column(

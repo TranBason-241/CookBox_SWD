@@ -51,7 +51,6 @@ class CartScreen extends StatelessWidget {
         ),
         body: Stack(
           children: [
-            
             Column(
               children: [
                 Card(

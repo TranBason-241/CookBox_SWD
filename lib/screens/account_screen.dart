@@ -26,78 +26,38 @@ class AccountScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              // SizedBox(
-              //   height: 80,
-              //   child: GestureDetector(
-              //     onTap: () {
-              //       Navigator.pushNamed(context, LoginScreen.routeName);
-              //     },
-              //     child: Container(
-              //       color: Color(0xfff0f0f0),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(20.0),
-              //         child: Row(
-              //           crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: const [
-              //             Icon(
-              //               Icons.account_circle,
-              //               color: Color(0xffcccccb),
-              //               size: 50,
-              //             ),
-              //             SizedBox(
-              //               width: 10,
-              //             ),
-              //             Text(
-              //               'Đăng nhập',
-              //               style: TextStyle(
-              //                 fontSize: 20,
-              //               ),
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 25),
-              //   child: SizedBox(
-              //     height: 50,
-              //     child: Row(
-              //       children: const [
-              //         CircleAvatar(
-              //           backgroundColor: Color(0xffcccccb),
-              //           child: Padding(
-              //             padding: const EdgeInsets.all(10),
-              //             child: FittedBox(
-              //               child: Icon(
-              //                 Icons.panorama_horizontal,
-              //                 color: Colors.black,
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(
-              //           width: 10,
-              //         ),
-              //         Text(
-              //           'Khuyến mãi',
-              //           style: TextStyle(
-              //             fontSize: 16,
-              //           ),
-              //         ),
-              //         Spacer(),
-              //         Icon(
-              //           Icons.arrow_forward_ios_outlined,
-              //           color: Color(0xffcccccb),
-              //           size: 15,
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              Divider(
-                color: Color(0xffcccccb),
+              SizedBox(
+                height: 80,
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigator.pushNamed(context, LoginScreen.routeName);
+                  },
+                  child: Container(
+                    color: Color(0xfff0f0f0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.account_circle,
+                            color: Color(0xffcccccb),
+                            size: 50,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Đăng nhập',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),

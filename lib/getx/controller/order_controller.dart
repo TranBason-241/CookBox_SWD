@@ -1,24 +1,26 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
 import 'package:app/screens/home.dart';
-import 'package:app/screens/order_screen.dart';
-import 'dart:math';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+// class OrderBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.put(OrderController);
+//   }
+// }
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderController extends GetxController {
-  var orderCreate = ResponceOrder();
+  Rxn<ResponseOrder> order = Rxn();
+  var orderCreate = ResponseOrder();
   var statusCreate = 1.obs;
-  // 1 default, 2 ok, 3 failed
-  // List<Item> listItem = <Item>[].obs;
-  // RxList<Item> productList = <Item>[].obs;
-  // RxList<Order> order = <Order>[].obs;
-  // List<Order> order = <Order>[].obs;
-  var order = ResponceOrder();
 
   @override
   void onInit() {
@@ -29,24 +31,19 @@ class OrderController extends GetxController {
 
   // var order = new Order();
   // Future<Order> fetchOrder() async {
-  Future<ResponceOrder> fetchOrder() async {
+  Future<void> fetchOrder() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
     final response = await http.get(
-        Uri.parse('http://54.255.129.30:8100/api/v1/user/orders'),
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/orders?user_id=1&page_number=1&page_size=100'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
           "Authorization": "Bearer ${token}"
         });
     if (response.statusCode == 200) {
-      print("ALOOO");
-      order = orderFromJson(response.body);
-      print(order.items!.length.toString());
-      Get.to(OrderScreen());
-      update();
-
-      return order;
+      order.value = orderFromJson(response.body);
     } else {
       throw Exception("Fail to load order");
     }
@@ -79,6 +76,28 @@ class OrderController extends GetxController {
     // print(2 + json['payment_name']);
     // print('${json}');
     createOrderApi(order);
+  }
+
+  Future<void> cancelOrder(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.put(
+        Uri.parse('http://54.255.129.30:8100/api/v1/user/orders/cancel?id=$id'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
+    if (response.statusCode == 200) {
+      print('Delete ok');
+      // update();
+
+      // Get.to(DishDetailScreen());
+      fetchOrder();
+      update();
+    } else {
+      throw Exception("Fail to loading dish detail");
+    }
   }
 
   Future createOrderApi(Order order) async {

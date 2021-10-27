@@ -37,10 +37,12 @@ dependencies:
   carousel_pro: ^1.0.0
   get:
   http: ^0.13.4
-  google_sign_in: ^5.1.1  
+  google_sign_in: ^5.1.1
   firebase_auth: ^3.1.2
   firebase_core: ^1.7.0
   shared_preferences: ^2.0.8
+  firebase_messaging: ^10.0.9
+  flutter_local_notifications: ^9.0.1
 
 dev_dependencies:
   flutter_test:

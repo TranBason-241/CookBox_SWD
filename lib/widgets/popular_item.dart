@@ -24,11 +24,12 @@ class PopularItemsCard extends StatelessWidget {
     // final Cart1 _p = Get.find<Cart1>();
     //  var List<Dish> = [];
     final CartController cart = Get.put(CartController());
-    final DishDetailController detailController = Get.find<DishDetailController>();
+    final DishDetailController detailController =
+        Get.find<DishDetailController>();
     // String imgUrl = dish.picture;
     return GestureDetector(
       onTap: () {
-       detailController.fetchDishDetail(dish.id);
+        detailController.fetchDishDetail(dish.id);
       },
       child: Container(
         padding: EdgeInsets.only(right: 7),

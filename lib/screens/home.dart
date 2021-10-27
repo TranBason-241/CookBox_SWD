@@ -3,6 +3,8 @@ import 'package:app/screens/account_screen.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/notify_screen.dart';
+import 'package:app/screens/order/cancelled_order_screen.dart';
+import 'package:app/screens/order/new_order_screen.dart';
 import 'package:app/screens/order_screen.dart';
 import 'package:app/screens/search_screen.dart';
 import 'package:flutter/material.dart';
