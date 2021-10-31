@@ -54,7 +54,8 @@ class Order {
   int? storeId;
   String? userName;
   String? storeName;
-  int? total;
+  // int? total;
+  double? total;
   String? orderStatus;
   List<OrderDetail>? orderDetails;
 
@@ -67,7 +68,7 @@ class Order {
         storeId: json["storeId"],
         userName: json["user_name"],
         storeName: json["store_name"],
-        total: json["total"],
+        total: json["total"].toDouble(),
         orderStatus: json["order_status"],
         orderDetails:
             List<OrderDetail>.from(json["orderDetails"].map((x) => x)),

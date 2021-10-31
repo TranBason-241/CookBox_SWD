@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:app/getx/controller/cart_controller.dart';
+import 'package:app/getx/controller/payment_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
 import 'package:app/screens/home.dart';
@@ -36,7 +35,7 @@ class OrderController extends GetxController {
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/orders?user_id=1&page_number=1&page_size=100'),
+            'http://54.255.129.30:8100/api/v1/user/orders?user_id=18&store_id=1'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
@@ -46,29 +45,31 @@ class OrderController extends GetxController {
       order.value = orderFromJson(response.body);
     } else {
       throw Exception("Fail to load order");
+      //Lay khoang cach
     }
   }
 
-  void createOrder() {
-    CartController cartController = Get.put(CartController());
-    var cart = cartController.cart;
-    Random random = new Random();
-    int randomID = random.nextInt(1000);
 
-    OrderDetail orderDetail = OrderDetail(
-        id: randomID, dishId: 18, dishName: 'string', quantity: 10, price: 300);
-
-    List<OrderDetail> listOrderDetail = [orderDetail];
+  
+  void createOrder() async {
+    PaymentController paymentController = Get.put(PaymentController());
+    double total = paymentController.total;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userName = prefs.getString('userName')!;
+    int userID = prefs.getInt('userID')!;
+    print('UserID nefeeeeeeeeeeeeeeeeeeeeeeeeeee: ${userID}');
+    List<OrderDetail> listOrderDetail = dishToOrderDetail();
+    var date = DateTime.now().toString();
     Order order = Order(
-        id: randomID,
-        date: DateTime.parse("2021-10-21T15:16:08.778Z"),
+        id: 0,
+        date: DateTime.parse(date),
         paymentName: 'Tien Mat',
         paymentId: 'CS',
-        userId: 1,
+        userId: userID,
         storeId: 1,
-        userName: 'abc',
+        userName: userName,
         storeName: 'chiNhanh1',
-        total: 200,
+        total: total,
         orderStatus: 'new',
         orderDetails: listOrderDetail);
 
@@ -76,6 +77,24 @@ class OrderController extends GetxController {
     // print(2 + json['payment_name']);
     // print('${json}');
     createOrderApi(order);
+    fetchOrder();
+    update();
+  }
+
+  List<OrderDetail> dishToOrderDetail() {
+    CartController cartController = Get.put(CartController());
+    var cart = cartController.cart;
+    List<OrderDetail> listOrderDetail = [];
+    cart.forEach((key, dishResponse) {
+      OrderDetail orderDetail = OrderDetail(
+          dishId: dishResponse.id,
+          dishName: dishResponse.name,
+          id: 0,
+          price: dishResponse.price,
+          quantity: dishResponse.quantity);
+      listOrderDetail.add(orderDetail);
+    });
+    return listOrderDetail;
   }
 
   Future<void> cancelOrder(int id) async {
@@ -119,6 +138,7 @@ class OrderController extends GetxController {
       // print(response.body);
       // print('ok');
       statusCreate.value = 1;
+      // fetchOrder();
       Get.to(Home());
     } else {
       // print('false roi');

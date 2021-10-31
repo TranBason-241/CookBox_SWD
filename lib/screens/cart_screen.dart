@@ -4,6 +4,7 @@ import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/home_screen.dart';
+import 'package:app/screens/payment_screen.dart';
 import 'package:app/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
@@ -185,7 +186,7 @@ class CartScreen extends StatelessWidget {
                                                   padding:
                                                       EdgeInsets.only(top: 10),
                                                   child: Text(
-                                                    '${((controller.cart[key]!.price)! * (controller.cart[key]!.quantity)!)!.toStringAsFixed(2)}đ (${controller.cart[key]!.quantity})',
+                                                    '${((controller.cart[key]!.price)! * (controller.cart[key]!.quantity)!).toStringAsFixed(2)}đ (${controller.cart[key]!.quantity})',
                                                     style: TextStyle(
                                                       fontSize: 18,
                                                     ),
@@ -335,7 +336,8 @@ class CartScreen extends StatelessWidget {
                                 )
                               : InkWell(
                                   onTap: () {
-                                    orderController.createOrder();
+                                    Get.to(PaymentScreen());
+                                    // orderController.createOrder();
                                   },
                                   child: Text(
                                     'Đặt hàng',

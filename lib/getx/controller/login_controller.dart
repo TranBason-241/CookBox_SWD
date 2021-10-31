@@ -64,8 +64,9 @@ class LoginController extends GetxController {
           await FirebaseAuth.instance.signInWithCredential(credential);
       firebaseUser = userCredentialData.user!;
       var idToken = await firebaseUser.getIdToken();
-
       prefs.setString('email', firebaseUser.email!);
+      
+
       Map data = {'token': idToken};
       var body = json.encode(data);
       var response = await http.post(
@@ -73,7 +74,7 @@ class LoginController extends GetxController {
           headers: {"Content-Type": "application/json"},
           body: body);
       if (response.statusCode == 200) {
-        print('b');
+       
         final responseData = json.decode(response.body);
         var token = responseData['token'];
         print('JWT: ${token}');
@@ -94,6 +95,9 @@ class LoginController extends GetxController {
         if (response2.statusCode == 200) {
           // print("call api getUser");
           UserLogin userInfo = await userFromJson(response2.body);
+          //save userID to local
+          prefs.setInt('userID', userInfo.id!);
+          prefs.setString('userName', userInfo.name!);
           if (userInfo.phone == null || userInfo.phone!.isEmpty) {
             // userInfo.phone == null || userInfo.phone!.isEmpty
             //  || userInfo.phone!.isEmpty

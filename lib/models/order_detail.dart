@@ -41,14 +41,15 @@ class OrderDetail {
   int? id;
   int? dishId;
   String? dishName;
-  int? price;
+  // int? price;
+  double? price;
   int? quantity;
 
   factory OrderDetail.fromJson(Map<String, dynamic> json) => OrderDetail(
         id: json["id"],
         dishId: json["dish_id"],
         dishName: json["dish_name"],
-        price: json["price"],
+        price: json["price"].toDouble(),
         quantity: json["quantity"],
       );
 

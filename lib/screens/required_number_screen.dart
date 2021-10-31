@@ -7,7 +7,6 @@ import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/widgets/custom_icon_button.dart';
-import 'package:app/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
