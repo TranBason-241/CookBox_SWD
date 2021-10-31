@@ -1,13 +1,14 @@
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/order_detail_controller.dart';
+import 'package:app/screens/order/reason_cancel_order_screen.dart';
 import 'package:app/screens/order_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
- 
+
 class NewOrderScreen extends GetView<OrderController> {
   const NewOrderScreen({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +50,7 @@ class NewOrderScreen extends GetView<OrderController> {
                                       //       Get.to(OrderDetailScreen());
                                       //     },
                                       // child:
- 
+
                                       IconButton(
                                     onPressed: () {
                                       Get.to(
@@ -100,8 +101,15 @@ class NewOrderScreen extends GetView<OrderController> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        controller.cancelOrder(controller
-                                            .order.value!.items![index].id!);
+                                        // controller.cancelOrder(controller
+                                        //     .order.value!.items![index].id!);
+                                        var a = controller
+                                            .order.value!.items![index].id!;
+                                        Get.to(() => ReasonCancelOrder(),
+                                            arguments: [
+                                              controller.order.value!
+                                                  .items![index].id!
+                                            ]);
                                       },
                                       child: const Text(
                                         "Hủy",
@@ -123,5 +131,3 @@ class NewOrderScreen extends GetView<OrderController> {
     );
   }
 }
- 
-

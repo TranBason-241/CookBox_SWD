@@ -34,6 +34,7 @@ class UserController extends GetxController {
       // print("call api getUser");
       UserLogin userInfo = userFromJson(response.body);
       user.value = userInfo;
+      prefs.setInt('userId', userInfo.id!);
       // print('emailllllllllllllllllllllll ${user.value.email}');
       update();
       return user.value;
