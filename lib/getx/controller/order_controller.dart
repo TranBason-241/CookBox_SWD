@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/payment_controller.dart';
+import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
+import 'package:app/models/user.dart';
 import 'package:app/screens/home.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +22,7 @@ class OrderController extends GetxController {
   Rxn<ResponseOrder> order = Rxn();
   var orderCreate = ResponseOrder();
   var statusCreate = 1.obs;
+  UserController userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -32,10 +35,11 @@ class OrderController extends GetxController {
   // Future<Order> fetchOrder() async {
   Future<void> fetchOrder() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/orders?user_id=18&store_id=1'),
+            'http://54.255.129.30:8100/api/v1/user/orders?user_id=${prefs.getInt('userId')}&page_number=1&page_size=100'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
@@ -97,11 +101,12 @@ class OrderController extends GetxController {
     return listOrderDetail;
   }
 
-  Future<void> cancelOrder(int id) async {
+  Future<void> cancelOrder(int id, String reason) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
     final response = await http.put(
-        Uri.parse('http://54.255.129.30:8100/api/v1/user/orders/cancel?id=$id'),
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/orders/cancel?id=$id&note=$reason'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",

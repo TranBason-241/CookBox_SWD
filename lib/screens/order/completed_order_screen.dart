@@ -4,10 +4,10 @@ import 'package:app/screens/order_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
- 
+
 class CompletedOrderScreen extends GetView<OrderController> {
   const CompletedOrderScreen({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class CompletedOrderScreen extends GetView<OrderController> {
                                       //       Get.to(OrderDetailScreen());
                                       //     },
                                       // child:
- 
+
                                       IconButton(
                                     onPressed: () {
                                       Get.to(
@@ -100,8 +100,8 @@ class CompletedOrderScreen extends GetView<OrderController> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        controller.cancelOrder(controller
-                                            .order.value!.items![index].id!);
+                                        // controller.cancelOrder(controller
+                                        //     .order.value!.items![index].id!);
                                       },
                                       child: const Text(
                                         "Đánh giá",
@@ -123,5 +123,3 @@ class CompletedOrderScreen extends GetView<OrderController> {
     );
   }
 }
- 
-
