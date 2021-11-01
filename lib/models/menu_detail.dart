@@ -36,6 +36,7 @@ class Item {
     required this.price,
     required this.description,
     required this.categoryName,
+    required this.meal,
     // required this.status,
     // required this.nutrientDes,
     required this.image,
@@ -46,6 +47,7 @@ class Item {
   double price;
   String description;
   String categoryName;
+  int meal;
   // bool status;
 
   // String nutrientDes;
@@ -58,6 +60,7 @@ class Item {
         image: json['dish']["image"],
         description: json['dish']["description"],
         categoryName: json["categoryName"],
+        meal: json['dish']["meal"],
         // status: json["status"],
         // nutrientDes: json["nutrient_des"] == null ? null : json["nutrient_des"],
         // image: json["image"] == null ? null : json["image"],
@@ -69,6 +72,7 @@ class Item {
         "price": price,
         "description": description,
         "categoryName": categoryName,
+        "meal": meal,
         // "status": status,
         // "nutrient_des": nutrientDes == null ? null : nutrientDes,
         "image": image == null ? null : image,

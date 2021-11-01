@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.to(SearchScreen());
                 },
                 decoration: InputDecoration(
-                  hintText: 'Tìm kiếm sản phẩm, công thức',
+                  hintText: 'Tìm kiếm sản phẩm',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),

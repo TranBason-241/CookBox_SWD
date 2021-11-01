@@ -107,7 +107,7 @@ class LoginController extends GetxController {
           } else {
             update();
             Get.back();
-            Get.to(Home());
+            Get.off(Home());
           }
         } else {
           throw Exception("fail to check phone number");

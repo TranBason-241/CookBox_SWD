@@ -4,7 +4,6 @@ import 'package:app/getx/controller/payment_controller.dart';
 import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/models/order.dart';
 import 'package:app/models/order_detail.dart';
-import 'package:app/models/user.dart';
 import 'package:app/screens/home.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -61,7 +60,7 @@ class OrderController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userName = prefs.getString('userName')!;
     int userID = prefs.getInt('userID')!;
-    print('UserID nefeeeeeeeeeeeeeeeeeeeeeeeeeee: ${userID}');
+   
     List<OrderDetail> listOrderDetail = dishToOrderDetail();
     var date = DateTime.now().toString();
     Order order = Order(
@@ -76,7 +75,6 @@ class OrderController extends GetxController {
         total: total,
         orderStatus: 'new',
         orderDetails: listOrderDetail);
-
     // Map<String, dynamic> json = order.toJson();
     // print(2 + json['payment_name']);
     // print('${json}');

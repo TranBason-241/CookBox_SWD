@@ -34,7 +34,7 @@ class PopularItemsCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(right: 7),
         height: 124,
-        width: 150,
+        width: 170,
         child: Container(
           // color: Colors.red,
           child: Column(
@@ -100,13 +100,13 @@ class PopularItemsCard extends StatelessWidget {
                 height: 35,
                 // color: Colors.yellow,
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       // color: Colors.red,
-                      padding: EdgeInsets.only(left: 3, right: 15),
+                      padding: EdgeInsets.only(left: 3, right: 0),
                       child: Text(
-                        '${dish.price}',
+                        '${dish.price}00 vnđ',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -119,7 +119,7 @@ class PopularItemsCard extends StatelessWidget {
                     IconButton(
                       icon: const Icon(
                         Icons.add_circle,
-                        size: 24,
+                        size: 25,
                         color: Colors.red,
                       ),
                       onPressed: () {
@@ -138,7 +138,7 @@ class PopularItemsCard extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   Text(
-                    '6k',
+                    '${dish.meal} (person)',
                     style: TextStyle(
                       color: Colors.grey,
                     ),
@@ -151,46 +151,46 @@ class PopularItemsCard extends StatelessWidget {
                   // ),
                 ],
               ),
-              Row(
-                children: const [
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.amber,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.amber,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.amber,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.amber,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "4.3 ",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
-                  ),
-                ],
-              ),
-              Text(
-                "(28 reviews)",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
+              // Row(
+              //   children: const [
+              //     Icon(
+              //       Icons.star,
+              //       size: 12,
+              //       color: Colors.amber,
+              //     ),
+              //     Icon(
+              //       Icons.star,
+              //       size: 12,
+              //       color: Colors.amber,
+              //     ),
+              //     Icon(
+              //       Icons.star,
+              //       size: 12,
+              //       color: Colors.amber,
+              //     ),
+              //     Icon(
+              //       Icons.star,
+              //       size: 12,
+              //       color: Colors.amber,
+              //     ),
+              //     Icon(
+              //       Icons.star,
+              //       size: 12,
+              //       color: Colors.grey,
+              //     ),
+              //     SizedBox(
+              //       width: 4,
+              //     ),
+              //     Text(
+              //       "4.3 ",
+              //       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+              //     ),
+              //   ],
+              // ),
+              // Text(
+              //   "(28 reviews)",
+              //   style: TextStyle(fontSize: 12, color: Colors.grey),
+              // ),
             ],
           ),
         ),
