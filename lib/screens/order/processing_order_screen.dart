@@ -4,10 +4,10 @@ import 'package:app/screens/order_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
- 
+
 class ProccessingOrderScreen extends GetView<OrderController> {
   const ProccessingOrderScreen({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class ProccessingOrderScreen extends GetView<OrderController> {
                                       //       Get.to(OrderDetailScreen());
                                       //     },
                                       // child:
- 
+
                                       IconButton(
                                     onPressed: () {
                                       Get.to(
@@ -60,7 +60,11 @@ class ProccessingOrderScreen extends GetView<OrderController> {
                                               .order.value!.items![index].id,
                                           'total': controller
                                               .order.value!.items![index].total!
-                                              .toDouble()
+                                              .toDouble(),
+                                          'paymentName': controller.order.value!
+                                              .items![index].paymentName,
+                                          'storeName': controller.order.value!
+                                              .items![index].storeName,
                                         },
                                       );
                                     },
@@ -83,29 +87,27 @@ class ProccessingOrderScreen extends GetView<OrderController> {
                                   children: [
                                     Text(
                                         '${controller.order.value!.items![index].total!}đ (${controller.order.value!.items![index].paymentName!})'),
-                                    // const Icon(
-                                    //   Icons.keyboard_arrow_right,
-                                    // ),
-                                    // TextButton(
-                                    //   style: ButtonStyle(
-                                    //     shape: MaterialStateProperty.all<
-                                    //         RoundedRectangleBorder>(
-                                    //       RoundedRectangleBorder(
-                                    //         borderRadius: BorderRadius.circular(10.0),
-                                    //         side: const BorderSide(
-                                    //           color: Colors.red,
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    //   onPressed: () {
-                                    //     controller.cancelOrder(
-                                    //         controller.order.items![index].id!);
-                                    //   },
-                                    //   child: const Text(
-                                    //     "Đánh giá",
-                                    //   ),
-                                    // ),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            side: const BorderSide(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        controller.confirmOrder(controller
+                                            .order.value!.items![index].id!);
+                                      },
+                                      child: const Text(
+                                        "Đã nhận hàng",
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -122,5 +124,3 @@ class ProccessingOrderScreen extends GetView<OrderController> {
     );
   }
 }
- 
-

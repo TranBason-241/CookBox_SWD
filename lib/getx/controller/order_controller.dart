@@ -52,15 +52,13 @@ class OrderController extends GetxController {
     }
   }
 
-
-  
   void createOrder() async {
     PaymentController paymentController = Get.put(PaymentController());
     double total = paymentController.total;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userName = prefs.getString('userName')!;
     int userID = prefs.getInt('userID')!;
-   
+
     List<OrderDetail> listOrderDetail = dishToOrderDetail();
     var date = DateTime.now().toString();
     Order order = Order(
@@ -112,6 +110,29 @@ class OrderController extends GetxController {
         });
     if (response.statusCode == 200) {
       print('Delete ok');
+      // update();
+
+      // Get.to(DishDetailScreen());
+      fetchOrder();
+      update();
+    } else {
+      throw Exception("Fail to loading dish detail");
+    }
+  }
+
+  Future<void> confirmOrder(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.put(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/orders/completed?id=$id'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
+    if (response.statusCode == 200) {
+      print('confirm ok');
       // update();
 
       // Get.to(DishDetailScreen());
