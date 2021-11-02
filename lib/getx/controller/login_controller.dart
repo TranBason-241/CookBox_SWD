@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/models/user.dart';
+import 'package:app/screens/ggmap/ride_picker_page.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login_screen.dart';
+import 'package:app/screens/map_picker_screen.dart';
 import 'package:app/screens/required_number_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -65,7 +67,6 @@ class LoginController extends GetxController {
       firebaseUser = userCredentialData.user!;
       var idToken = await firebaseUser.getIdToken();
       prefs.setString('email', firebaseUser.email!);
-      
 
       Map data = {'token': idToken};
       var body = json.encode(data);
@@ -74,7 +75,6 @@ class LoginController extends GetxController {
           headers: {"Content-Type": "application/json"},
           body: body);
       if (response.statusCode == 200) {
-       
         final responseData = json.decode(response.body);
         var token = responseData['token'];
         print('JWT: ${token}');
@@ -107,7 +107,8 @@ class LoginController extends GetxController {
           } else {
             update();
             Get.back();
-            Get.off(Home());
+            // Get.off(Home());
+            Get.off(RidePickerPage());
           }
         } else {
           throw Exception("fail to check phone number");

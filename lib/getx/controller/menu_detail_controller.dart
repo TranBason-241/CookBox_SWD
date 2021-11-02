@@ -10,10 +10,14 @@ class MenuDetailController extends GetxController {
   var isLoading = false.obs;
   int categoryID;
   MenuDetailController({this.categoryID = 2});
+  var name = ''.obs;
 
   @override
-  onInit() {
+  onInit() async {
     super.onInit();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String storeName = prefs.getString('storeName')!;
+    name = storeName.obs;
     fetchDish();
   }
 
@@ -21,9 +25,13 @@ class MenuDetailController extends GetxController {
     isLoading(false);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
+    String storeId = prefs.getString('storeId')!;
+    String storeName = prefs.getString('storeName')!;
+    name = storeName.obs;
+    print(name);
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=1&category_id=2'),
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=$storeId&category_id=2'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",

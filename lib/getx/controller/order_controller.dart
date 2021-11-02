@@ -76,7 +76,7 @@ class OrderController extends GetxController {
     // Map<String, dynamic> json = order.toJson();
     // print(2 + json['payment_name']);
     // print('${json}');
-    createOrderApi(order);
+    await createOrderApi(order);
     fetchOrder();
     update();
   }
