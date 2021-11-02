@@ -1,8 +1,10 @@
+import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/payment_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -40,12 +42,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Container(
                 color: Colors.red,
-                height: 140,
+                height: 230,
                 width: 400,
                 child: GetBuilder<PaymentController>(
                   builder: (controller) => ListView.builder(
                     itemCount: controller.listItem.length,
+                    // itemCount: 2,
+
                     itemBuilder: (context, index) {
+                      print(controller.listItem[index].name!);
+                      // return Text(controller.listItem[index].name!);
                       return dummyDataOfListView(
                         controller.listItem[index].image!,
                         controller.listItem[index].name!,
@@ -55,7 +61,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         controller.listItem[index].quantity!,
                       );
                     },
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     // padding: EdgeInsets.only(left: 16),
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
@@ -75,19 +81,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         children: <Widget>[
                           Expanded(
                             child: Text(
-                              "Tổng: 3 sản phẩm",
+                              "Tạm tính: ",
                               style: TextStyle(
                                 fontSize: 18.0,
                               ),
                             ),
                           ),
-                          Text(
-                            "${controller.total}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
+                          Obx(
+                            () => Text(
+                              "${controller.total}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -98,22 +106,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       margin: const EdgeInsets.only(
                           left: 30.0, right: 30.0, top: 10),
                       child: Row(
-                        children: const [
+                        children: <Widget>[
                           Expanded(
-                            child: Text(
-                              "Phí vận chuyển(11 km)",
+                              child: Obx(
+                            () => Text(
+                              "Phí vận chuyển( ${controller.distance} km)",
                               style: TextStyle(
                                 fontSize: 18.0,
                               ),
                             ),
-                          ),
-                          Text(
-                            "99,000đ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
+                          )),
+                          Obx(
+                            () => Text(
+                              "${controller.distance * 8000}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -134,14 +145,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                             ),
                           ),
-                          Text(
-                            "${controller.total}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
+                          Obx(
+                            () => Text(
+                              "${controller.totalFinal}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -149,7 +162,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       color: Color(0xffcccccb),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        // orderController.createOrder();
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(
                             left: 30.0, right: 30.0, top: 10),
@@ -253,13 +268,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   leading: Container(
                     child: Image(
                       fit: BoxFit.cover,
-                      // image: NetworkImage(imgSrc),
                       image: NetworkImage(imgSrc),
                       width: 70,
                       height: 70,
                     ),
                   ),
-
                   // Lists of titles
                   title: Container(
                     // color: Colors.red,
@@ -276,13 +289,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 fontWeight: FontWeight.bold, fontSize: 15.0),
                           ),
                         ),
-                        // Container(
-                        //   padding: EdgeInsets.only(bottom: 3.0),
-                        //   child: Text(
-                        //     "${itemDes}",
-                        //     style: TextStyle(),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -305,7 +311,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   )),
             ),
-            Divider(height: 5,)
+            Divider(
+              height: 5,
+            )
           ],
         ));
   }

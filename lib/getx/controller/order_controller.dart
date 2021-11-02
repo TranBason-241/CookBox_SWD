@@ -52,15 +52,18 @@ class OrderController extends GetxController {
     }
   }
 
-
-  
   void createOrder() async {
-    PaymentController paymentController = Get.put(PaymentController());
-    double total = paymentController.total;
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    CartController cartController = Get.put(CartController());
+    PaymentController paymentController = Get.put(PaymentController());
+    double total = paymentController.total.value;
+    // double distance = prefs.getDouble(key)
+
     String userName = prefs.getString('userName')!;
     int userID = prefs.getInt('userID')!;
-   
+    double distance = prefs.getDouble('distance')!;
+    double shippingCost = distance * 8000;
+    total += shippingCost;
     List<OrderDetail> listOrderDetail = dishToOrderDetail();
     var date = DateTime.now().toString();
     Order order = Order(
@@ -78,9 +81,12 @@ class OrderController extends GetxController {
     // Map<String, dynamic> json = order.toJson();
     // print(2 + json['payment_name']);
     // print('${json}');
-    createOrderApi(order);
+    await createOrderApi(order);
     fetchOrder();
+    cartController.cleanCart();
+
     update();
+    Get.offAll(Home());
   }
 
   List<OrderDetail> dishToOrderDetail() {
@@ -122,6 +128,29 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> confirmOrder(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.put(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/orders/completed?id=$id'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
+    if (response.statusCode == 200) {
+      print('confirm ok');
+      // update();
+
+      // Get.to(DishDetailScreen());
+      fetchOrder();
+      update();
+    } else {
+      throw Exception("Fail to loading dish detail");
+    }
+  }
+
   Future createOrderApi(Order order) async {
     Map<String, dynamic> json1 = order.toJson();
     String body = json.encode(json1);
@@ -142,7 +171,7 @@ class OrderController extends GetxController {
       // print('ok');
       statusCreate.value = 1;
       // fetchOrder();
-      Get.to(Home());
+
     } else {
       // print('false roi');
       statusCreate.value = 2;

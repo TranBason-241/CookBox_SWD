@@ -4,10 +4,10 @@ import 'package:app/screens/order_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
- 
+
 class CancelledOrderScreen extends GetView<OrderController> {
   const CancelledOrderScreen({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class CancelledOrderScreen extends GetView<OrderController> {
                                       //       Get.to(OrderDetailScreen());
                                       //     },
                                       // child:
- 
+
                                       IconButton(
                                     onPressed: () {
                                       Get.to(
@@ -60,7 +60,11 @@ class CancelledOrderScreen extends GetView<OrderController> {
                                               .order.value!.items![index].id,
                                           'total': controller
                                               .order.value!.items![index].total!
-                                              .toDouble()
+                                              .toDouble(),
+                                          'paymentName': controller.order.value!
+                                              .items![index].paymentName,
+                                          'storeName': controller.order.value!
+                                              .items![index].storeName,
                                         },
                                       );
                                     },
@@ -122,5 +126,3 @@ class CancelledOrderScreen extends GetView<OrderController> {
     );
   }
 }
- 
-

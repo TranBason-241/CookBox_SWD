@@ -43,11 +43,20 @@ class PopularItemsCard extends StatelessWidget {
               Container(
                 height: 150,
                 width: 150,
-                color: Colors.grey,
-                child: Image.network(
-                  dish.image,
-                  fit: BoxFit.cover,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                  color: Colors.red.withOpacity(0.4),
+                  image: DecorationImage(
+                    image: NetworkImage(dish.image),
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                // child: CircleAvatar(
+                //   radius: 30,
+                //   backgroundImage: NetworkImage(
+                //     dish.image,
+                //   ),
+                // )
 
                 //     decoration: BoxDecoration(
                 //   image: const DecorationImage(
@@ -106,7 +115,7 @@ class PopularItemsCard extends StatelessWidget {
                       // color: Colors.red,
                       padding: EdgeInsets.only(left: 3, right: 0),
                       child: Text(
-                        '${dish.price}00 vnđ',
+                        '${dish.price}vnđ',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -123,8 +132,7 @@ class PopularItemsCard extends StatelessWidget {
                         color: Colors.red,
                       ),
                       onPressed: () {
-                        // cart.addToCart(dish);
-                        // print(cart.getCart()[dish.dishID]?.quantity);
+                        detailController.fetchDishDetail(dish.id);
                       },
                     ),
                   ],

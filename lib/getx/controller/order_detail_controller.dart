@@ -11,18 +11,20 @@ class OrderDetailBinding extends Bindings {
 }
 
 class OrderDetailController extends GetxController {
-  
   final Rxn<ResponceOrderDetail> orderDetail = Rxn();
   int orderId = 0;
   var isLoading = false.obs;
   double total = 0.0;
+  String paymentName = '';
+  String storeName = '';
 
   @override
   void onInit() {
     super.onInit();
     orderId = Get.arguments['orderId'];
     total = Get.arguments['total'];
-    print(total.toString() + 'âksakjhdkhfjdhj');
+    paymentName = Get.arguments['paymentName'];
+    storeName = Get.arguments['storeName'];
     fetchOrderDetail(orderId);
   }
 

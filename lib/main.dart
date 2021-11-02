@@ -11,6 +11,7 @@ import 'package:app/screens/order/new_order_screen.dart';
 import 'package:app/screens/order/processing_order_screen.dart';
 import 'package:app/screens/order_detail_screen.dart';
 import 'package:app/screens/order_screen.dart';
+import 'package:app/screens/picker_store_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,11 @@ void main() async {
         page: () => ProccessingOrderScreen(),
         binding: Binding(),
       ),
+      // GetPage(
+      //   name: '/picker_store',
+      //   page: () => PickerStore(),
+      //   binding: Binding(),
+      // ),
       GetPage(
         name: '/completed_order',
         page: () => CompletedOrderScreen(),

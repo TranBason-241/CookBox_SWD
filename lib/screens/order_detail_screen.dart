@@ -1,7 +1,7 @@
 import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- 
+
 class OrderDetailScreen extends GetView<OrderDetailController> {
   // OrderDetailController orderDetailController =
   //     Get.find<OrderDetailController>();
@@ -17,6 +17,23 @@ class OrderDetailScreen extends GetView<OrderDetailController> {
             ? const Center(child: CircularProgressIndicator())
             : Column(
                 children: [
+                  Column(
+                    children: [
+                      Text(
+                        'Tổng tiền: ' + controller.total.toString() + 'đ',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        'Phương thức thanh toán: ' +
+                            controller.paymentName.toString(),
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        'Cửa hàng: ' + controller.storeName.toString(),
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: controller.orderDetail.value!.items!.length,
@@ -42,21 +59,9 @@ class OrderDetailScreen extends GetView<OrderDetailController> {
                       },
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text('Tổng tiền: ' + controller.total.toString() + 'đ'),
-                        Text('Tổng tiền: ' + controller.total.toString() + 'đ'),
-                        Text('Tổng tiền: ' + controller.total.toString() + 'đ'),
-                      ],
-                    ),
-                  ),
                 ],
               ),
       ),
     );
   }
 }
- 
- 
-

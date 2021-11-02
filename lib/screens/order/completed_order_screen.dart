@@ -60,7 +60,11 @@ class CompletedOrderScreen extends GetView<OrderController> {
                                               .order.value!.items![index].id,
                                           'total': controller
                                               .order.value!.items![index].total!
-                                              .toDouble()
+                                              .toDouble(),
+                                          'paymentName': controller.order.value!
+                                              .items![index].paymentName,
+                                          'storeName': controller.order.value!
+                                              .items![index].storeName,
                                         },
                                       );
                                     },

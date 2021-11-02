@@ -7,6 +7,7 @@ import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/getx/controller/payment_controller.dart';
 
 import 'package:app/getx/controller/search_controller.dart';
+import 'package:app/getx/controller/store_controller.dart';
 import 'package:app/getx/controller/user_controller.dart';
 
 import 'package:app/getx/controller/menu_detail_controller.dart';
@@ -26,5 +27,6 @@ class Binding implements Bindings {
     Get.lazyPut(() => SearchController());
     Get.lazyPut(() => UserController());
     Get.lazyPut(() => PaymentController());
+    // Get.lazyPut(() => StoreController());
   }
 }
