@@ -52,15 +52,14 @@ class OrderController extends GetxController {
     }
   }
 
-
-  
   void createOrder() async {
+    CartController cartController = Get.put(CartController());
     PaymentController paymentController = Get.put(PaymentController());
     double total = paymentController.total;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userName = prefs.getString('userName')!;
     int userID = prefs.getInt('userID')!;
-   
+
     List<OrderDetail> listOrderDetail = dishToOrderDetail();
     var date = DateTime.now().toString();
     Order order = Order(
@@ -78,9 +77,12 @@ class OrderController extends GetxController {
     // Map<String, dynamic> json = order.toJson();
     // print(2 + json['payment_name']);
     // print('${json}');
-    createOrderApi(order);
+    await createOrderApi(order);
     fetchOrder();
+    cartController.cleanCart();
+
     update();
+    Get.off(Home());
   }
 
   List<OrderDetail> dishToOrderDetail() {
@@ -142,7 +144,7 @@ class OrderController extends GetxController {
       // print('ok');
       statusCreate.value = 1;
       // fetchOrder();
-      Get.to(Home());
+
     } else {
       // print('false roi');
       statusCreate.value = 2;

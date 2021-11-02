@@ -123,8 +123,7 @@ class PopularItemsCard extends StatelessWidget {
                         color: Colors.red,
                       ),
                       onPressed: () {
-                        // cart.addToCart(dish);
-                        // print(cart.getCart()[dish.dishID]?.quantity);
+                        detailController.fetchDishDetail(dish.id);
                       },
                     ),
                   ],

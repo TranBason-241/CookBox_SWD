@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuDetailController extends GetxController {
   List<Item> listItem = <Item>[].obs;
-
+  Map<String, List<Item>> listOfCateShow = {};
   var isLoading = false.obs;
   int categoryID;
   MenuDetailController({this.categoryID = 2});
@@ -18,6 +18,11 @@ class MenuDetailController extends GetxController {
   }
 
   Future<List<Item>> fetchDish() async {
+    Map<String, List<Item>> a = {
+      'Món Gà': listItem,
+      'Món Nướng': listItem,
+      'Lẩu': listItem
+    };
     isLoading(false);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token')!;
@@ -30,7 +35,6 @@ class MenuDetailController extends GetxController {
           "Authorization": "Bearer ${token}"
         });
 
-    print(categoryID);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

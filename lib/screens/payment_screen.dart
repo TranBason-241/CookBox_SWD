@@ -1,3 +1,4 @@
+import 'package:app/getx/controller/cart_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/payment_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -149,7 +150,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       color: Color(0xffcccccb),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        // orderController.createOrder();
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(
                             left: 30.0, right: 30.0, top: 10),

@@ -16,6 +16,15 @@ class CartController extends GetxController {
 //     getCart();
 //   }
 
+
+  void cleanCart(){
+     cart = {};
+     listChildDish = [];
+     total.value = 0.0;
+     update();
+  }
+
+
   void getTotal() {
     total.value = 0.0;
     cart.forEach((key, value) {

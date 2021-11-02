@@ -1,3 +1,4 @@
+import 'package:app/getx/controller/dish_detail_controller.dart';
 import 'package:app/getx/controller/search_controller.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/home_screen.dart';
@@ -21,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     var productData = [];
-
+    DishDetailController detailController = Get.find<DishDetailController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff32726),
@@ -38,28 +39,6 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         title: SizedBox(
           child: Text('Tìm Kiếm'),
-          // height: 37,
-          // width: 300,
-          // child: TextField(
-          //     controller: seachText,
-          //     textInputAction: TextInputAction.search,
-          //     // onChanged: (value) {
-          //     //   //
-          //     // },
-          //     onSubmitted: (value) {
-          //       print(value);
-          //     },
-          //     decoration: InputDecoration(
-          //       hintText: 'Tìm kiếm sản phẩm, công thức',
-          //       prefixIcon: const Icon(Icons.search),
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide.none,
-          //       ),
-          //       contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          //       filled: true,
-          //       fillColor: Colors.white,
-          //     )),
         ),
         actions: [],
         centerTitle: false,
@@ -185,92 +164,103 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 110,
-                                width: 110,
-                                child: Image.network(
-                                  controller.listMenuDetail[index].image,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 15, right: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      // color: Colors.yellow,
-                                      width: 200,
-                                      height: 110,
-                                      child: Stack(
-                                        children: [
-                                          Positioned(
-                                              top: 0,
-                                              left: 5,
-                                              child: Text(
-                                                "${controller.listMenuDetail[index].name}",
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black
-                                                        .withOpacity(0.7)),
-                                              )),
-                                          Positioned(
-                                            top: 30,
-                                            left: 5,
-                                            child: Text(
-                                                "${controller.listMenuDetail[index].description}",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black)),
-                                          ),
-                                          Positioned(
-                                            top: 50,
-                                            left: 5,
-                                            child: Text("3 người ăn",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black)),
-                                          ),
-                                          Positioned(
-                                              top: 85,
-                                              left: 5,
-                                              child: Text(
-                                                "${controller.listMenuDetail[index].price}đ",
-                                                style: TextStyle(
-                                                    fontSize: 22,
-                                                    color: Colors.green),
-                                              )),
-                                          // Positioned(
-                                          //     top: 33,
-                                          //     left: 5,
-                                          //     child: Text(
-                                          //       "$address",
-                                          //       style: TextStyle(fontSize: 12),
-                                          //     )),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.add_circle,
-                                    size: 34,
-                                    color: Colors.red,
+                        InkWell(
+                          onTap: () {
+                            detailController.fetchDishDetail(
+                                controller.listMenuDetail[index].id);
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 110,
+                                  width: 110,
+                                  child: Image.network(
+                                    controller.listMenuDetail[index].image,
+                                    fit: BoxFit.cover,
                                   ),
-                                  onPressed: () {
-                                    // cart.addToCart(dish);
-                                    // print(cart.getCart()[dish.dishID]?.quantity);
-                                  },
                                 ),
-                              ),
-                            ],
+                                Container(
+                                  padding: EdgeInsets.only(left: 15, right: 5),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        // color: Colors.yellow,
+                                        width: 200,
+                                        height: 110,
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                                top: 0,
+                                                left: 5,
+                                                child: Text(
+                                                  "${controller.listMenuDetail[index].name}",
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black
+                                                          .withOpacity(0.7)),
+                                                )),
+                                            Positioned(
+                                              top: 30,
+                                              left: 5,
+                                              child: Text(
+                                                  "${controller.listMenuDetail[index].description}",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black)),
+                                            ),
+                                            Positioned(
+                                              top: 50,
+                                              left: 5,
+                                              child: Text("3 người ăn",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black)),
+                                            ),
+                                            Positioned(
+                                                top: 85,
+                                                left: 5,
+                                                child: Text(
+                                                  "${controller.listMenuDetail[index].price}đ",
+                                                  style: TextStyle(
+                                                      fontSize: 22,
+                                                      color: Colors.green),
+                                                )),
+                                            // Positioned(
+                                            //     top: 33,
+                                            //     left: 5,
+                                            //     child: Text(
+                                            //       "$address",
+                                            //       style: TextStyle(fontSize: 12),
+                                            //     )),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: IconButton(
+                                    icon: const Icon(
+                                      Icons.add_circle,
+                                      size: 34,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      onTap:
+                                      () {
+                                        detailController.fetchDishDetail(
+                                            controller
+                                                .listMenuDetail[index].id);
+                                      };
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Divider(
