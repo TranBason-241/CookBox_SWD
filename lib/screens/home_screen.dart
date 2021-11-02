@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalNotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
@@ -81,12 +82,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         final routeFromMessage = message.data['route'];
         // Get.to(OrderScreen(), binding: OrderBinding());
         print(routeFromMessage + 'Hlsssslo');
         Get.toNamed(routeFromMessage);
+        var _fcm = FirebaseMessaging.instance;
+        _fcm.getToken().then((value) => print('The |||' + value!));
       }
     });
     FirebaseMessaging.onMessage.listen((message) {
@@ -95,6 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
         print(message.notification!.title);
         LocalNotificationService.display(message);
       }
+      var _fcm = FirebaseMessaging.instance;
+      _fcm.getToken().then((value) => print('The |||' + value!));
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
@@ -103,31 +109,49 @@ class _HomeScreenState extends State<HomeScreen> {
       // Get.to(routeFromMessage);
       print(routeFromMessage + 'Hllo');
       Get.toNamed(routeFromMessage);
+      var _fcm = FirebaseMessaging.instance;
+      _fcm.getToken().then((value) => print('The|||' + value!));
     });
   }
 
   final SearchController searchController = Get.put(SearchController());
+
   @override
   Widget build(BuildContext context) {
     // var a = controller2.fetchDishDetail();
     // print(' ${a.name}');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xfff32726),
         titleSpacing: 0,
         elevation: 0.0,
         title: TextButton(
-            onPressed: () {},
-            child: Row(
-              children: const [
-                Icon(Icons.fmd_good_outlined, color: Colors.white),
-                Text(
-                  'TP. HCM',
-                  style: TextStyle(color: Colors.white),
+          onPressed: () {},
+          child: Row(
+            children: [
+              // Icon(Icons.fmd_good_outlined, color: Colors.white),
+              Icon(
+                Icons.store_mall_directory,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 100,
+                child: Obx(
+                  () => Text(
+                    controller.name.value == ''
+                        ? 'CookboxApp'
+                        : controller.name.value,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
-                Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white),
-              ],
-            )),
+              ),
+
+              //   const Icon(Icons.keyboard_arrow_down_rounded,
+              //       color: Colors.white),
+            ],
+          ),
+        ),
         centerTitle: false,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),

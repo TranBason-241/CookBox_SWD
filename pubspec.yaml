@@ -44,6 +44,12 @@ dependencies:
   firebase_messaging: ^10.0.9
   flutter_local_notifications: ^9.0.1
 
+  google_maps_flutter: ^2.0.6
+  geolocator: ^7.0.3
+  geocoding: ^2.0.0
+  geocoder: any
+  flutter_polyline_points: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +75,8 @@ flutter:
   assets:
     - assets/images/star_filled.png
     - assets/images/google.png
+    - ic_location_black.png
+    - ic_remove_x.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

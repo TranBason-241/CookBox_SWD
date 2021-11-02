@@ -308,7 +308,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   )),
             ),
-            Divider(height: 5,)
+            Divider(
+              height: 5,
+            )
           ],
         ));
   }

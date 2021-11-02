@@ -124,6 +124,29 @@ class OrderController extends GetxController {
     }
   }
 
+  Future<void> confirmOrder(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token')!;
+    final response = await http.put(
+        Uri.parse(
+            'http://54.255.129.30:8100/api/v1/user/orders/completed?id=$id'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json",
+          "Authorization": "Bearer ${token}"
+        });
+    if (response.statusCode == 200) {
+      print('confirm ok');
+      // update();
+
+      // Get.to(DishDetailScreen());
+      fetchOrder();
+      update();
+    } else {
+      throw Exception("Fail to loading dish detail");
+    }
+  }
+
   Future createOrderApi(Order order) async {
     Map<String, dynamic> json1 = order.toJson();
     String body = json.encode(json1);
