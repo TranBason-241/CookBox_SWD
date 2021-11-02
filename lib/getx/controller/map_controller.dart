@@ -33,11 +33,16 @@ class MapController extends GetxController {
   List<Marker> groupMarker = [];
   List<LatLng> groupLatLng = [
     //Số 603 Lê Đức Thọ, P. 16, Q. Gò Vấp, TpHCM
-    const LatLng(10.835081169058773, 106.68136060618755),
-    // 240-316 Nguyễn Thị Thập,Quận 7, Thành phố Hồ Chí Minh
-    const LatLng(10.738680811304695, 106.7155865397451),
+    // const LatLng(10.835081169058773, 106.68136060618755),
+
+    // 568 Đ. Lê Văn Việt, Long Thạnh Mỹ, Quận 9
+    const LatLng(10.849722185120427, 106.81179912625585),
+    const LatLng(10.798216991868848, 106.74490714160189),
+
+    //const LatLng(10.849722185120427, 106.81179912625585),
+
     //
-    const LatLng(10.841811133985468, 106.81026715667838),
+    // const LatLng(10.841811133985468, 106.81026715667838),
   ];
   // List<>
   final String key = 'AIzaSyB6qKAdiSFWcLQhlPjnoW9E2h9V5RKT-3g';

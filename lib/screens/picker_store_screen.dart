@@ -62,9 +62,9 @@ class PickerStoreSreen extends GetView<StoreController> {
                               size: 40,
                             ),
                             subtitle: Text(
-                                '${controller.store.value!.items![index].name}'),
+                                '${controller.store.value!.items![index].name} - ${controller.store.value!.items![index].distance} km'),
                             title: Text(
-                              'Tên cửa hàng ',
+                              'Tên cửa hàng  ',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6)),
                             ),
@@ -80,7 +80,8 @@ class PickerStoreSreen extends GetView<StoreController> {
                                 //   'storeName',
                                 //   controller.store.value!.items![index].name
                                 // });
-                                storecontroller.setSelected(controller.store.value!.items![index].id!);
+                                storecontroller.setSelected(
+                                    controller.store.value!.items![index].id!);
                               },
                               icon: const Icon(
                                 Icons.keyboard_arrow_right,

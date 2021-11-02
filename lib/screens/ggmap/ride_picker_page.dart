@@ -41,7 +41,21 @@ class _RidePickerPageState extends State<RidePickerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color(0xfff32726),
+        titleSpacing: 0,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: const Text('Địa chỉ của bạn'),
+      ),
       body: Container(
         constraints: BoxConstraints.expand(),
         color: Color(0xfff8f8f8),
@@ -126,28 +140,18 @@ class _RidePickerPageState extends State<RidePickerPage> {
                           title: Text(places.elementAt(index).name),
                           subtitle: Text(places.elementAt(index).address),
                           onTap: () async {
-                            // Navigator.of(context).pop();
-                            // widget.onSelected(places.elementAt(index),
-                            //     widget._isFromAddress);
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            // prefs.setString(
-                            //     'address', places.elementAt(index).address);
+                            prefs.setString(
+                                'address', places.elementAt(index).address);
 
-                            prefs.setString('address',
-                                '30 Đường Trần Não P. Bình An Quận 2 Thành phố Hồ Chí Minh');
-
-                            // prefs.setDouble('lat', places.elementAt(index).lat);
-                            // prefs.setDouble(
-                            //     'long', places.elementAt(index).lng);
-                            prefs.setDouble('lat', 10.790855357395138);
-                            prefs.setDouble('long', 106.73012961248729);
+                            prefs.setDouble('lat', places.elementAt(index).lat);
+                            prefs.setDouble(
+                                'long', places.elementAt(index).lng);
 
                             MapController controller = new MapController();
-                            // Get.to(MapController(), binding: MapBinding());
-                            controller.calculateDistanceForAllGroup();
 
-                            // controller.calculateDistance();
+                            controller.calculateDistanceForAllGroup();
                           },
                         );
                       },
@@ -159,42 +163,65 @@ class _RidePickerPageState extends State<RidePickerPage> {
                       // itemCount: places.length,
                     );
                   } else {
-                    return Container(
-                      child: ElevatedButton(
-                        // onPressed: () {
-                        //   // MapController controller = new MapController();
-                        //   // Get.to(MapController(), binding: MapBinding());
-                        //   // controller.calculateDistanceForAllGroup();
-                        // },
-                        child: const Text('Xác nhận vị trí'),
-                        onPressed: () async {
-                          // Navigator.of(context).pop();
-                          // widget.onSelected(places.elementAt(index),
-                          //     widget._isFromAddress);
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          // prefs.setString(
-                          //     'address', places.elementAt(index).address);
+                    // return Container(
+                    //   child: ElevatedButton(
+                    //     // onPressed: () {
+                    //     //   // MapController controller = new MapController();
+                    //     //   // Get.to(MapController(), binding: MapBinding());
+                    //     //   // controller.calculateDistanceForAllGroup();
+                    //     // },
+                    //     child: const Text('Xác nhận vị trí'),
+                    //     onPressed: () async {
+                    //       // Navigator.of(context).pop();
+                    //       // widget.onSelected(places.elementAt(index),
+                    //       //     widget._isFromAddress);
+                    //       SharedPreferences prefs =
+                    //           await SharedPreferences.getInstance();
+                    //       // prefs.setString(
+                    //       //     'address', places.elementAt(index).address);
 
-                          prefs.setString('address',
-                              '30 Đường Trần Não P. Bình An Quận 2 Thành phố Hồ Chí Minh');
+                    //       prefs.setString('address',
+                    //           '30 Đường Trần Não P. Bình An Quận 2 Thành phố Hồ Chí Minh');
 
-                          // prefs.setDouble('lat', places.elementAt(index).lat);
-                          // prefs.setDouble(
-                          //     'long', places.elementAt(index).lng);
-                          prefs.setDouble('lat', 10.790855357395138);
-                          prefs.setDouble('long', 106.73012961248729);
+                    //       // prefs.setDouble('lat', places.elementAt(index).lat);
+                    //       // prefs.setDouble(
+                    //       //     'long', places.elementAt(index).lng);
+                    //       prefs.setDouble('lat', 10.790855357395138);
+                    //       prefs.setDouble('long', 106.73012961248729);
 
-                          MapController controller = new MapController();
-                          // Get.to(MapController(), binding: MapBinding());
-                          controller.calculateDistanceForAllGroup();
+                    //       MapController controller = new MapController();
+                    //       // Get.to(MapController(), binding: MapBinding());
+                    //       controller.calculateDistanceForAllGroup();
 
-                          // controller.calculateDistance();
-                        },
-                      ),
-                    );
+                    //       // controller.calculateDistance();
+                    //     },
+                    //   ),
+                    // );
+                    return Text('');
                   }
                 },
+              ),
+            ),
+            Container(
+              child: ElevatedButton(
+                onPressed: () async {
+                  // MapController controller = new MapController();
+                  // // Get.to(MapController(), binding: MapBinding());
+
+                  // SharedPreferences prefs =
+                  //     await SharedPreferences.getInstance();
+                  // prefs.setString('address',
+                  //     '30 Đường Trần Não P. Bình An Quận 2 Thành phố Hồ Chí Minh');
+                  // prefs.setDouble('lat', 10.790855357395138);
+                  // prefs.setDouble('long', 106.73012961248729);
+                  // controller.calculateDistanceForAllGroup();
+                  // // StoreController storeController = new StoreController();
+                  // // storeController.fetchStore();
+                  // // Get.toNamed('home');
+                  // print('object');
+                  Get.to(PickerStoreSreen(), binding: StoreBinding());
+                },
+                child: const Text('Xác nhận vị trí'),
               ),
             ),
             Container(
