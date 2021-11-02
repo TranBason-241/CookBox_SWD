@@ -195,7 +195,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                             size: 16),
                                                         onPressed: () {
                                                           controller.editTaste(
-                                                              'remove');
+                                                              'remove',index);
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),
@@ -220,7 +220,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                         onPressed: () {
                                                           // updateState("add");
                                                           controller
-                                                              .editTaste('add');
+                                                              .editTaste('add',index);
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),

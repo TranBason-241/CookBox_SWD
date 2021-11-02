@@ -1,5 +1,6 @@
 import 'package:app/models/order_detail.dart';
 import 'package:app/models/user.dart';
+import 'package:app/screens/ggmap/ride_picker_page.dart';
 import 'package:app/screens/home.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -79,7 +80,9 @@ class UserController extends GetxController {
       fetchUser();
       update();
       if (type.compareTo('phone_required') == 0) {
-        Get.to(Home());
+        Get.to(RidePickerPage());
+        // Get.to(Home());
+        
       } else {
         Get.back();
       }

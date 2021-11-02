@@ -16,14 +16,12 @@ class CartController extends GetxController {
 //     getCart();
 //   }
 
-
-  void cleanCart(){
-     cart = {};
-     listChildDish = [];
-     total.value = 0.0;
-     update();
+  void cleanCart() {
+    cart = {};
+    listChildDish = [];
+    total.value = 0.0;
+    update();
   }
-
 
   void getTotal() {
     total.value = 0.0;
@@ -57,6 +55,7 @@ class CartController extends GetxController {
   }
 
   void addToCart(DishResponse dish, int quantity) {
+    print('Dishhhhhhhhhhhhhhhhhhhhhhhhhhhh old ${dish.id}');
     DishResponse newDish = DishResponse();
     newDish.id = 1;
     getTrueDish(dish).then((value) {
@@ -81,7 +80,6 @@ class CartController extends GetxController {
     DishResponse dish = DishResponse();
     List<DishResponse> listDish = await getDishByTaste(oldDish);
     for (int i = 0; i < listDish.length; i++) {
-     
       bool flag = true;
       for (int j = 0; j < listDish[i].tasteDetails!.length; j++) {
         if (listDish[i].tasteDetails![j].tasteId ==
@@ -94,6 +92,7 @@ class CartController extends GetxController {
       }
       if (flag) {
         dish = listDish[i];
+        print('TRUE DISHHHHHHHHHHHHHHHHHHHHHHHHHH ${dish.id}');
         return dish;
       }
     }
@@ -105,7 +104,7 @@ class CartController extends GetxController {
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes/dishparentchildren?store_id=1&dish_id=18'),
+            'http://54.255.129.30:8100/api/v1/user/dishes/dishparentchildren?store_id=1&dish_id=${oldDish.id}'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",

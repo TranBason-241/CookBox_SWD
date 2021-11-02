@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/models/user.dart';
 import 'package:app/screens/ggmap/ride_picker_page.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login_screen.dart';
-import 'package:app/screens/map_picker_screen.dart';
 import 'package:app/screens/required_number_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

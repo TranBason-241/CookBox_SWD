@@ -13,30 +13,32 @@ class MenuDetailController extends GetxController {
   var name = ''.obs;
 
   @override
-  onInit() async {
+  onInit() {
     super.onInit();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String storeName = prefs.getString('storeName')!;
-    name = storeName.obs;
+    
+    
     fetchDish();
   }
 
   Future<List<Item>> fetchDish() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name.value= prefs.getString('storeName')!;
+   
     Map<String, List<Item>> a = {
       'Món Gà': listItem,
       'Món Nướng': listItem,
       'Lẩu': listItem
     };
     isLoading(false);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+   
     String token = prefs.getString('token')!;
     String storeId = prefs.getString('storeId')!;
-    String storeName = prefs.getString('storeName')!;
-    name = storeName.obs;
+    // String storeName = prefs.getString('storeName')!;
+    
     print(name);
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=$storeId&category_id=2'),
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=$storeId&category_id=1'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",

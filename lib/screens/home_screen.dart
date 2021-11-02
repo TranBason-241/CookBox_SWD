@@ -3,6 +3,7 @@ import 'package:app/getx/controller/dish_detail_controller.dart';
 import 'package:app/getx/controller/order_controller.dart';
 import 'package:app/getx/controller/order_detail_controller.dart';
 import 'package:app/getx/controller/search_controller.dart';
+import 'package:app/getx/controller/store_controller.dart';
 import 'package:app/models/detail_dish.dart';
 import 'package:app/screens/cart_screen.dart';
 import 'package:app/screens/order/new_order_screen.dart';
@@ -67,17 +68,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> images = [
-    'https://cf.shopee.vn/file/b19a4998332c28c3fe1014429f12b2c5',
-    'https://cdn.chanhtuoi.com/uploads/2021/07/foodmap.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD-qQL9OpIzo1logABt9hiMAEz0gpviVf8jA&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvabEVjmLblf-tX64eNpj6ZRtl_IH1weF_A&usqp=CAU',
-  ];
+  
 
   final MenuDetailController controller =
       Get.put(MenuDetailController(categoryID: 2));
 
   final DishDetailController controller2 = Get.put(DishDetailController());
+  final SearchController searchController = Get.put(SearchController());
+  final OrderController orderController = Get.put(OrderController());
+  final StoreController storeController = Get.put(StoreController());
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  final SearchController searchController = Get.put(SearchController());
+  
 
   @override
   Widget build(BuildContext context) {

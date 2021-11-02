@@ -38,7 +38,7 @@ class DishDetailController extends GetxController {
     String token = prefs.getString('token')!;
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes/dishparent?store_id=1&dish_id=18'),
+            'http://54.255.129.30:8100/api/v1/user/dishes/dishparent?store_id=1&dish_id=$id'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
@@ -61,17 +61,17 @@ class DishDetailController extends GetxController {
     }
   }
 
-  void editTaste(String type) {
+  void editTaste(String type,int index) {
     //chi dang xu 1 cay thoi
     if (type.compareTo('add') == 0) {
-      if (dish.tasteDetails![0].tasteLevel! < 3) {
-        dish.tasteDetails![0].tasteLevel =
-            dish.tasteDetails![0].tasteLevel! + 1;
+      if (dish.tasteDetails![index].tasteLevel! < 3) {
+        dish.tasteDetails![index].tasteLevel =
+            dish.tasteDetails![index].tasteLevel! + 1;
       }
     } else {
-      if (dish.tasteDetails![0].tasteLevel! > 1) {
-        dish.tasteDetails![0].tasteLevel =
-            dish.tasteDetails![0].tasteLevel! - 1;
+      if (dish.tasteDetails![index].tasteLevel! > 1) {
+        dish.tasteDetails![index].tasteLevel =
+            dish.tasteDetails![index].tasteLevel! - 1;
       }
     }
     update();

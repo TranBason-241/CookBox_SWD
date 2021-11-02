@@ -53,13 +53,17 @@ class OrderController extends GetxController {
   }
 
   void createOrder() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     CartController cartController = Get.put(CartController());
     PaymentController paymentController = Get.put(PaymentController());
-    double total = paymentController.total;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    double total = paymentController.total.value;
+    // double distance = prefs.getDouble(key)
+
     String userName = prefs.getString('userName')!;
     int userID = prefs.getInt('userID')!;
-
+    double distance = prefs.getDouble('distance')!;
+    double shippingCost = distance * 8000;
+    total += shippingCost;
     List<OrderDetail> listOrderDetail = dishToOrderDetail();
     var date = DateTime.now().toString();
     Order order = Order(
@@ -82,7 +86,7 @@ class OrderController extends GetxController {
     cartController.cleanCart();
 
     update();
-    Get.off(Home());
+    Get.offAll(Home());
   }
 
   List<OrderDetail> dishToOrderDetail() {

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PickerStoreSreen extends GetView<StoreController> {
-  StoreController storecontroller = StoreController();
+  StoreController storecontroller = Get.put(StoreController());
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +76,11 @@ class PickerStoreSreen extends GetView<StoreController> {
                                     '${controller.store.value!.items![index].id}');
                                 prefs.setString('storeName',
                                     '${controller.store.value!.items![index].name}');
-                                Get.toNamed(HomeScreen.routeName, arguments: {
-                                  'storeName',
-                                  controller.store.value!.items![index].name
-                                });
+                                // Get.toNamed(HomeScreen.routeName, arguments: {
+                                //   'storeName',
+                                //   controller.store.value!.items![index].name
+                                // });
+                                storecontroller.setSelected(controller.store.value!.items![index].id!);
                               },
                               icon: const Icon(
                                 Icons.keyboard_arrow_right,

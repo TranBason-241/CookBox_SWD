@@ -34,20 +34,21 @@ class Item {
     this.name,
     this.address,
     this.status,
-    // this.distance
+    this.distance
   });
 
   int? id;
   String? name;
   String? address;
   bool? status;
-  // double? distance;
+  double? distance;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json["id"],
         name: json["name"],
         address: json["address"],
         status: json["status"],
+        
       );
 
   Map<String, dynamic> toJson() => {
