@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   // const Home({Key? key}) : super(key: key);
-
+  HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
