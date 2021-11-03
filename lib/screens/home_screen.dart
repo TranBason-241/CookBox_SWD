@@ -68,8 +68,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-
   final MenuDetailController controller =
       Get.put(MenuDetailController(categoryID: 2));
 
@@ -77,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final SearchController searchController = Get.put(SearchController());
   final OrderController orderController = Get.put(OrderController());
   final StoreController storeController = Get.put(StoreController());
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -87,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (message != null) {
         final routeFromMessage = message.data['route'];
         // Get.to(OrderScreen(), binding: OrderBinding());
-        print(routeFromMessage + 'Hlsssslo');
+        // print(routeFromMessage + 'Hlsssslo');
         Get.toNamed(routeFromMessage);
         var _fcm = FirebaseMessaging.instance;
         _fcm.getToken().then((value) => print('The |||' + value!));
@@ -113,8 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _fcm.getToken().then((value) => print('The|||' + value!));
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -227,13 +223,67 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 5,
                     ),
+
                     Container(
                       // padding: EdgeInsets.only(left: 16, right: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Giảm giá',
+                            'Món kho',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20,
+                              // color: Colors.grey.shade500,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              searchController.viewMore(1);
+                              Get.to(SearchScreen());
+                            },
+                            child: const Text(
+                              "Xem tất cả",
+                              style: TextStyle(
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Colors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 274,
+                      width: 1200,
+                      child: GetBuilder<MenuDetailController>(
+                        builder: (controller) => ListView.builder(
+                          itemCount: controller.listOfCateShow['1']!.length,
+                          itemBuilder: (context, index) {
+                            return PopularItemsCard(
+                              dish: controller.listOfCateShow['1']![index],
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                          // padding: EdgeInsets.only(left: 16),
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                        ),
+                      ),
+                    ),
+                    // SizedBox(
+                    //   height: 5,
+                    // ),
+                    Divider(
+                      height: 1,
+                    ),
+                    Container(
+                      // padding: EdgeInsets.only(left: 16, right: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Món nướng',
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 20,
@@ -260,58 +310,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 274,
                       width: 1200,
                       child: GetBuilder<MenuDetailController>(
-                        builder: (controller) => ListView.builder(
-                          itemCount: controller.listItem.length,
-                          itemBuilder: (context, index) {
-                            return PopularItemsCard(
-                              dish: controller.listItem[index],
-                            );
-                          },
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.only(left: 16),
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      // padding: EdgeInsets.only(left: 16, right: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Giảm giá',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20,
-                              // color: Colors.grey.shade500,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Xem tất cả",
-                              style: TextStyle(
-                                  // fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 274,
-                      width: 1200,
-                      child: GetBuilder<MenuDetailController>(
                         builder: (controller2) => ListView.builder(
-                          itemCount: controller2.listItem.length,
+                          itemCount: controller.listOfCateShow['2']!.length,
                           itemBuilder: (context, index) {
                             return PopularItemsCard(
-                              dish: controller2.listItem[index],
+                              dish: controller.listOfCateShow['2']![index],
                             );
                           },
                           scrollDirection: Axis.horizontal,

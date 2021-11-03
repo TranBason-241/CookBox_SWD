@@ -86,7 +86,7 @@ class OrderController extends GetxController {
     cartController.cleanCart();
 
     update();
-    Get.offAll(Home());
+    Get.off(Home());
   }
 
   List<OrderDetail> dishToOrderDetail() {

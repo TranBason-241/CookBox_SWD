@@ -1,4 +1,5 @@
 
+import 'package:app/getx/controller/home_controller.dart';
 import 'package:app/getx/controller/user_controller.dart';
 import 'package:app/models/user.dart';
 import 'package:app/screens/ggmap/ride_picker_page.dart';
@@ -137,11 +138,10 @@ class LoginController extends GetxController {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
-    // HomeController controller = Get.find<HomeController>();
-    // controller.tabIndex = 0;
-
+    HomeController controller = Get.find<HomeController>();
+    controller.tabIndex = 0;
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
-    Get.to(LoginScreen());
+    Get.offAll(LoginScreen());
   }
 }

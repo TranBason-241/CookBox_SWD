@@ -15,30 +15,25 @@ class MenuDetailController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    
-    
-    fetchDish();
+    fetchData();
   }
 
-  Future<List<Item>> fetchDish() async {
+
+  void fetchData () async {
+     getMenuDetailByCate(1).then((value) => listOfCateShow['1'] = value);
+     getMenuDetailByCate(2).then((value) => listOfCateShow['2'] = value);
+  }
+  Future<List<Item>> getMenuDetailByCate(int cateID) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name.value= prefs.getString('storeName')!;
-   
-    Map<String, List<Item>> a = {
-      'Món Gà': listItem,
-      'Món Nướng': listItem,
-      'Lẩu': listItem
-    };
-    isLoading(false);
-   
+    name.value = prefs.getString('storeName')!;
     String token = prefs.getString('token')!;
     String storeId = prefs.getString('storeId')!;
     // String storeName = prefs.getString('storeName')!;
-    
-    print(name);
+
+    // print(name);
     final response = await http.get(
         Uri.parse(
-            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=$storeId&category_id=1'),
+            'http://54.255.129.30:8100/api/v1/user/dishes?store_id=$storeId&category_id=$cateID'),
         headers: {
           "Accept": "application/json",
           "content-type": "application/json",
@@ -48,7 +43,6 @@ class MenuDetailController extends GetxController {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      List<MenuDetail> list = [];
       MenuDetail obj = dishTestFromJson(response.body); //Tra ve 1 obj DishTest
       isLoading(true);
       listItem = obj.items as List<Item>;
