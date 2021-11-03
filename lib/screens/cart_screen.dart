@@ -31,7 +31,7 @@ class CartScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(Home());
+              Get.off(Home());
             },
           ),
           title: Text("Giỏ hàng của bạn"),

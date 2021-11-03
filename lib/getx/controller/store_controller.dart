@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:app/getx/controller/home_controller.dart';
 import 'package:app/models/store.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/home_screen.dart';
@@ -26,7 +27,7 @@ class StoreController extends GetxController {
         prefs.setDouble('distance', store.value!.items![i].distance!);
       }
     }
-    Get.off(Home());
+    Get.to(() =>Home());
   }
 
   @override
