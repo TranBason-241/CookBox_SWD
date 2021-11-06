@@ -39,6 +39,7 @@ class CartScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Provider.of<Cart>(context, listen: false).removeAll();
+                cartController.cleanCart();
               },
               child: Text(
                 'Xóa giỏ hàng',
@@ -132,8 +133,8 @@ class CartScreen extends StatelessWidget {
                                             Container(
                                                 padding:
                                                     const EdgeInsets.all(15),
-                                                height: 130,
-                                                width: 130,
+                                                height: 120,
+                                                width: 105,
                                                 child: Image.network(
                                                   '${controller.cart[key]!.image}',
                                                   fit: BoxFit.cover,
@@ -141,126 +142,126 @@ class CartScreen extends StatelessWidget {
                                           ],
                                         ),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: <Widget>[
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      '${controller.cart[key]!.name}',
-                                                      style: TextStyle(
-                                                        fontSize: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 115),
-                                                      child: CustomIconButton(
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          icon: Icon(
-                                                            Icons.close,
-                                                            color: Colors.red,
-                                                            size: 15,
-                                                          ),
-                                                          onPressed: () {
-                                                            // MyAlert();
-                                                            cartController
-                                                                .deleteDishInCart(
-                                                                    controller
-                                                                        .cart[
-                                                                            key]!
-                                                                        .id!);
-                                                          },
-                                                          margin: EdgeInsets
-                                                              .only()),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      EdgeInsets.only(top: 10),
-                                                  child: Text(
-                                                    '${((controller.cart[key]!.price)! * (controller.cart[key]!.quantity)!).toStringAsFixed(2)}đ (${controller.cart[key]!.quantity})',
+                                          padding: EdgeInsets.only(top: 20),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: <Widget>[
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    '${controller.cart[key]!.name}',
                                                     style: TextStyle(
                                                       fontSize: 18,
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.only(
-                                                      top: 15, left: 130),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Container(
-                                                        child: CustomIconButton(
-                                                            backgroundColor:
-                                                                Colors.green,
-                                                            icon: Icon(
-                                                              Icons.remove,
-                                                              color:
-                                                                  Colors.white,
-                                                              size: 12,
-                                                            ),
-                                                            onPressed: () {
-                                                              cartController
-                                                                  .editQuantity(
-                                                                      controller
-                                                                          .cart[
-                                                                              key]!
-                                                                          .id!,
-                                                                      'remove');
-                                                            },
-                                                            margin: EdgeInsets
-                                                                .only()),
-                                                      ),
-                                                      Container(
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10),
-                                                        child: Text(
-                                                          '${controller.cart[key]!.quantity}',
-                                                          style: TextStyle(
-                                                            fontSize: 20 * 0.8,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.center,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 115),
+                                                    child: CustomIconButton(
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        icon: Icon(
+                                                          Icons.close,
+                                                          color: Colors.red,
+                                                          size: 15,
                                                         ),
-                                                      ),
-                                                      Container(
-                                                        child: CustomIconButton(
-                                                            backgroundColor:
-                                                                Colors.green,
-                                                            icon: Icon(
-                                                              Icons.add,
-                                                              color:
-                                                                  Colors.white,
-                                                              size: 12,
-                                                            ),
-                                                            onPressed: () {
-                                                              cartController
-                                                                  .editQuantity(
-                                                                      controller
-                                                                          .cart[
-                                                                              key]!
-                                                                          .id!,
-                                                                      'add');
-                                                            },
-                                                            margin: EdgeInsets
-                                                                .only()),
-                                                      ),
-                                                    ],
+                                                        onPressed: () {
+                                                          // MyAlert();
+                                                          cartController
+                                                              .deleteDishInCart(
+                                                                  controller
+                                                                      .cart[
+                                                                          key]!
+                                                                      .id!);
+                                                        },
+                                                        margin:
+                                                            EdgeInsets.only()),
                                                   ),
-                                                )
-                                              ],
-                                            )),
+                                                ],
+                                              ),
+                                              Container(
+                                                padding:
+                                                    EdgeInsets.only(top: 10),
+                                                child: Text(
+                                                  '${((controller.cart[key]!.price)! * (controller.cart[key]!.quantity)!).toStringAsFixed(2)}đ (${controller.cart[key]!.quantity})',
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    top: 15, left: 130),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                      child: CustomIconButton(
+                                                          backgroundColor:
+                                                              Colors.green,
+                                                          icon: Icon(
+                                                            Icons.remove,
+                                                            color: Colors.white,
+                                                            size: 12,
+                                                          ),
+                                                          onPressed: () {
+                                                            cartController
+                                                                .editQuantity(
+                                                                    controller
+                                                                        .cart[
+                                                                            key]!
+                                                                        .id!,
+                                                                    'remove');
+                                                          },
+                                                          margin: EdgeInsets
+                                                              .only()),
+                                                    ),
+                                                    Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 10),
+                                                      child: Text(
+                                                        '${controller.cart[key]!.quantity}',
+                                                        style: TextStyle(
+                                                          fontSize: 20 * 0.8,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      child: CustomIconButton(
+                                                        backgroundColor:
+                                                            Colors.green,
+                                                        icon: Icon(
+                                                          Icons.add,
+                                                          color: Colors.white,
+                                                          size: 12,
+                                                        ),
+                                                        onPressed: () {
+                                                          cartController
+                                                              .editQuantity(
+                                                                  controller
+                                                                      .cart[
+                                                                          key]!
+                                                                      .id!,
+                                                                  'add');
+                                                        },
+                                                        margin:
+                                                            EdgeInsets.only(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   );

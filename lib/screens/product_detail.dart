@@ -195,7 +195,7 @@ class ProductDetailScreen extends StatelessWidget {
                                                             size: 16),
                                                         onPressed: () {
                                                           controller.editTaste(
-                                                              'remove',index);
+                                                              'remove', index);
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),
@@ -219,8 +219,8 @@ class ProductDetailScreen extends StatelessWidget {
                                                         ),
                                                         onPressed: () {
                                                           // updateState("add");
-                                                          controller
-                                                              .editTaste('add',index);
+                                                          controller.editTaste(
+                                                              'add', index);
                                                         },
                                                         margin:
                                                             EdgeInsets.all(0)),
@@ -951,7 +951,7 @@ showButtonModalSheet(BuildContext context, DishDetailController controller) {
                             width: 10,
                           ),
                           Text(
-                            'Thêm vào giỏ hàngg',
+                            'Thêm vào giỏ hàng',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,

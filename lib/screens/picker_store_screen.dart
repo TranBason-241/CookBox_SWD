@@ -47,7 +47,7 @@ class PickerStoreSreen extends GetView<StoreController> {
       //       )),
       body: Obx(
         () => controller.store.value == null
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : ListView.builder(
                 itemCount: controller.store.value!.items!.length,
                 itemBuilder: (context, index) {

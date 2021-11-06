@@ -257,18 +257,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 274,
                       width: 1200,
                       child: GetBuilder<MenuDetailController>(
-                        builder: (controller) => ListView.builder(
-                          itemCount: controller.listOfCateShow['1']!.length,
-                          itemBuilder: (context, index) {
-                            return PopularItemsCard(
-                              dish: controller.listOfCateShow['1']![index],
-                            );
-                          },
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.only(left: 16),
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                        ),
+                        builder: (controller) => controller.isLoading == true
+                            ? ListView.builder(
+                                itemCount:
+                                    controller.listOfCateShow['1']!.length,
+                                itemBuilder: (context, index) {
+                                  return PopularItemsCard(
+                                    dish:
+                                        controller.listOfCateShow['1']![index],
+                                  );
+                                },
+                                scrollDirection: Axis.horizontal,
+                                // padding: EdgeInsets.only(left: 16),
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                              )
+                            : Center(
+                                child: Container(
+                                  height: 15,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
                       ),
                     ),
                     // SizedBox(
@@ -309,19 +318,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       height: 274,
                       width: 1200,
+                      // child: GetBuilder<MenuDetailController>(
+                      //   builder: (controller2) => ListView.builder(
+                      //     itemCount: controller.listOfCateShow['2']!.length,
+                      //     itemBuilder: (context, index) {
+                      //       return PopularItemsCard(
+                      //         dish: controller.listOfCateShow['2']![index],
+                      //       );
+                      //     },
+                      //     scrollDirection: Axis.horizontal,
+                      //     // padding: EdgeInsets.only(left: 16),
+                      //     shrinkWrap: true,
+                      //     physics: BouncingScrollPhysics(),
+                      //   ),
+                      // ),
                       child: GetBuilder<MenuDetailController>(
-                        builder: (controller2) => ListView.builder(
-                          itemCount: controller.listOfCateShow['2']!.length,
-                          itemBuilder: (context, index) {
-                            return PopularItemsCard(
-                              dish: controller.listOfCateShow['2']![index],
-                            );
-                          },
-                          scrollDirection: Axis.horizontal,
-                          // padding: EdgeInsets.only(left: 16),
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                        ),
+                        builder: (controller) => controller.isLoading == true
+                            ? ListView.builder(
+                                itemCount:
+                                    controller.listOfCateShow['2']!.length,
+                                itemBuilder: (context, index) {
+                                  return PopularItemsCard(
+                                    dish:
+                                        controller.listOfCateShow['2']![index],
+                                  );
+                                },
+                                scrollDirection: Axis.horizontal,
+                                // padding: EdgeInsets.only(left: 16),
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                              )
+                            : Center(
+                                child: Container(
+                                  height: 15,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
                       ),
                     )
                     /////

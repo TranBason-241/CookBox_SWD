@@ -34,6 +34,7 @@ class CartController extends GetxController {
     if (cart.containsKey(id)) {
       cart.remove(id);
     }
+    getTotal();
     update();
   }
 

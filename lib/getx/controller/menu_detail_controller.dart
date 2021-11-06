@@ -18,11 +18,11 @@ class MenuDetailController extends GetxController {
     fetchData();
   }
 
-
-  void fetchData () async {
-     getMenuDetailByCate(1).then((value) => listOfCateShow['1'] = value);
-     getMenuDetailByCate(2).then((value) => listOfCateShow['2'] = value);
+  void fetchData() async {
+    getMenuDetailByCate(1).then((value) => listOfCateShow['1'] = value);
+    getMenuDetailByCate(2).then((value) => listOfCateShow['2'] = value);
   }
+
   Future<List<Item>> getMenuDetailByCate(int cateID) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     name.value = prefs.getString('storeName')!;
@@ -47,6 +47,7 @@ class MenuDetailController extends GetxController {
       isLoading(true);
       listItem = obj.items as List<Item>;
       update();
+
       return listItem;
     } else {
       // If the server did not return a 200 OK response,
